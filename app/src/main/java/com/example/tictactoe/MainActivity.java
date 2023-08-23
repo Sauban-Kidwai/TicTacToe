@@ -1,7 +1,6 @@
 package com.example.tictactoe;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private boolean isNameEnterView = false;
+    private int currentLayoutId = R.layout.activity_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +17,15 @@ public class MainActivity extends AppCompatActivity {
         int currentOrientation = getResources().getConfiguration().orientation;
 
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_main_landscape);
-            // Initial view
-        } else {
-            setContentView(R.layout.activity_main);
-            // Initial view
+            currentLayoutId = R.layout.activity_main_landscape;
         }
 
+        setContentView(currentLayoutId);
+
+        setupButtonListeners();
+    }
+
+    private void setupButtonListeners() {
         Button singleplayer_button = findViewById(R.id.singleplayer_button);
         Button multiplayer_button = findViewById(R.id.multiplayer_button);
 
@@ -31,20 +33,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isNameEnterView = true;
-                setContentView(R.layout.name_enter); // Switch to name_enter.xml
-                Button back_button = findViewById(R.id.back_button);
+                setContentView(R.layout.name_enter);
+                currentLayoutId = R.layout.name_enter;
+                setupBackButtonListener();
+            }
+        });
+    }
 
-                back_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        isNameEnterView = false;
-                        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                            setContentView(R.layout.activity_main_landscape); // Switch back to activity_main_landscape.xml
-                        } else {
-                            setContentView(R.layout.activity_main); // Switch back to activity_main.xml
-                        }
-                    }
-                });
+    private void setupBackButtonListener() {
+        Button back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isNameEnterView = false;
+                currentLayoutId = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                        ? R.layout.activity_main_landscape : R.layout.activity_main;
+                setContentView(currentLayoutId);
+                setupButtonListeners();
             }
         });
     }
