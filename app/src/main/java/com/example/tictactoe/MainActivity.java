@@ -9,18 +9,12 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private boolean isNameEnterView = false;
-    private int currentLayoutId = R.layout.activity_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int currentOrientation = getResources().getConfiguration().orientation;
 
-        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-            currentLayoutId = R.layout.activity_main_landscape;
-        }
-
-        setContentView(currentLayoutId);
+        setContentView(R.layout.activity_main);
 
         setupButtonListeners();
     }
@@ -34,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isNameEnterView = true;
                 setContentView(R.layout.name_enter);
-                currentLayoutId = R.layout.name_enter;
                 setupBackButtonListener();
             }
         });
@@ -46,11 +39,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isNameEnterView = false;
-                currentLayoutId = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-                        ? R.layout.activity_main_landscape : R.layout.activity_main;
-                setContentView(currentLayoutId);
-                setupButtonListeners();
+                updateLayout();
             }
         });
+    }
+
+    private void updateLayout() {
+        if (isNameEnterView) {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                setContentView(R.layout.name_enter_landscape);
+            } else {
+                setContentView(R.layout.name_enter);
+            }
+            setupBackButtonListener();
+        } else {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                setContentView(R.layout.activity_main_landscape);
+            } else {
+                setContentView(R.layout.activity_main);
+            }
+            setupButtonListeners();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        updateLayout();
     }
 }
