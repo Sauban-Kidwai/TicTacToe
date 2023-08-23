@@ -14,7 +14,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        int currentOrientation = getResources().getConfiguration().orientation;
+        isNameEnterView = (currentOrientation == Configuration.ORIENTATION_LANDSCAPE);
+
+        updateLayout();
 
         setupButtonListeners();
     }
@@ -27,18 +30,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isNameEnterView = true;
-                setContentView(R.layout.name_enter);
-                setupBackButtonListener();
-            }
-        });
-    }
-
-    private void setupBackButtonListener() {
-        Button back_button = findViewById(R.id.back_button);
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isNameEnterView = false;
                 updateLayout();
             }
         });
@@ -60,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
             }
             setupButtonListeners();
         }
+    }
+
+    private void setupBackButtonListener() {
+        Button back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isNameEnterView = false;
+                updateLayout();
+            }
+        });
     }
 
     @Override
