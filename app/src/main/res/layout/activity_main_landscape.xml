@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.55"/>
+        app:layout_constraintGuide_percent="0.5"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -72,7 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.93"/>
+        app:layout_constraintGuide_percent="0.9"/>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -111,6 +111,8 @@
         android:layout_height="0dp"
         android:text="Single Player"
         android:layout_margin="20dp"
+        android:background="@drawable/buttons"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/guideline7"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
@@ -123,6 +125,8 @@
         android:layout_height="0dp"
         android:text="Multiplayer"
         android:layout_margin="20dp"
+        android:background="@drawable/buttons"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/guideline8"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline2"
