@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/game_blue">
+
+    <!-- Top Space (40%) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="2dp">
+        <!-- Add your content for the top 40% here -->
+    </LinearLayout>
+
+    <!-- Tic Tac Toe Grid (50%) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- First Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:paddingBottom="16dp"
+            android:gravity="center">
+
+            <!-- Buttons for the first row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+        </LinearLayout>
+
+        <!-- Line Between Rows -->
+        <View
+            android:layout_width="350dp"
+            android:layout_height="4dp"
+            android:background="@android:color/white"/>
+
+        <!-- Second Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:gravity="center">
+
+            <!-- Buttons for the second row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button5"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button6"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button7"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button8"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+        </LinearLayout>
+
+        <!-- Line Between Rows -->
+        <View
+            android:layout_width="350dp"
+            android:layout_height="4dp"
+            android:background="@android:color/white"/>
+
+        <!-- Third Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:gravity="center">
+
+            <!-- Buttons for the third row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button9"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button10"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button11"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button12"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+        </LinearLayout>
+
+        <!-- Line Between Rows -->
+        <View
+            android:layout_width="350dp"
+            android:layout_height="4dp"
+            android:background="@android:color/white"/>
+
+        <!-- Fourth Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:gravity="center">
+
+            <!-- Buttons for the fourth row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button13"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button14"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button15"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button16"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button17"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom Space (10%) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:gravity="center">
+        <!-- Add your content for the bottom 10% here -->
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,14 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".game_board">
+    android:orientation="vertical"
+    android:background="@color/game_blue">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Top Space (40%) -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="2dp">
+        <!-- Add your content for the top 40% here -->
+    </LinearLayout>
 
-</FrameLayout>
+    <!-- Tic Tac Toe Grid (50%) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- First Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:gravity="center">
+
+
+            <!-- Buttons for the first row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button1"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button2"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button3"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="400dp"
+            android:layout_height="4dp"
+            android:background="@android:color/white"/>
+
+        <!-- Second Row -->
+        <!-- Repeat the same structure as the first row for the second row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:gravity="center">
+
+            <!-- Buttons for the first row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button4"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button5"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button6"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="400dp"
+            android:layout_height="4dp"
+            android:background="@android:color/white"/>
+
+        <!-- Third Row -->
+        <!-- Repeat the same structure as the first row for the third row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:gravity="center">
+
+            <!-- Buttons for the first row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button7"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button8"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button9"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textSize="24sp"
+                android:onClick="onCellClick"
+                android:background="@color/game_blue"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- Bottom Space (10%) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:gravity="center">
+        <!-- Add your content for the bottom 10% here -->
+    </LinearLayout>
+
+</LinearLayout>
