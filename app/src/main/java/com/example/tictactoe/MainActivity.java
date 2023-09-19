@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Button singlePlayerButton = findViewById(R.id.singleplayer_button);
 
         // OnClickListener button
+        // Fuck u
         singlePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
