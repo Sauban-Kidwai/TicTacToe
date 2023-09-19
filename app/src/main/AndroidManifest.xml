@@ -25,6 +25,7 @@
 
         </activity>
         <activity android:name=".SinglePlayerActivity"/>
+        <activity android:name=".MultiPlayerActivity"/>
         <activity android:name=".ThreeByThree" />
         <activity android:name=".FourByFour" />
         <activity android:name=".FiveByFive" />
