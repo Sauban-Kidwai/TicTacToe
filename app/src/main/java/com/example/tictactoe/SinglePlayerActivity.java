@@ -14,7 +14,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_game_board);
+        setContentView(R.layout.fragment_game_board_3x3);
 
         buttons = new Button[9];
         buttons[0] = findViewById(R.id.Button1);
