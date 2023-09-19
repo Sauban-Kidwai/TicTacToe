@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_main_menu);
 
         int orientation = getResources().getConfiguration().orientation;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Find the Single Player button by its ID
         Button singlePlayerButton = findViewById(R.id.singleplayer_button);
+        Button multiPlayerButton = findViewById(R.id.multiplayer_button);
 
         // OnClickListener button
         singlePlayerButton.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // When the button is clicked, start the new activity
                 Intent intent = new Intent(MainActivity.this, SinglePlayerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        multiPlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // When the button is clicked, start the new activity
+                Intent intent = new Intent(MainActivity.this, MultiPlayerActivity.class);
                 startActivity(intent);
             }
         });
