@@ -135,7 +135,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
                 <View
                     android:layout_width="4dp"
@@ -154,7 +155,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
                 <View
                     android:layout_width="4dp"
@@ -173,7 +175,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
                 <View
                     android:layout_width="80dp"
@@ -207,7 +210,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
                 <View
                     android:layout_width="4dp"
@@ -226,7 +230,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
                 <View
                     android:layout_width="4dp"
@@ -245,10 +250,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
-
-
-
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
 
                 <View
@@ -284,7 +287,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
                 <View
                     android:layout_width="4dp"
@@ -303,7 +307,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
                 <View
                     android:layout_width="4dp"
@@ -322,9 +327,8 @@
                     android:background="@color/game_blue"
                     android:onClick="onCellClick"
                     android:text=""
-                    android:textSize="24sp" />
-
-
+                    android:textSize="24sp"
+                    android:contentDescription="Clear Selection"/>
 
             </GridLayout>
 
