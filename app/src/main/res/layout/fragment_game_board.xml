@@ -13,7 +13,7 @@
         android:layout_weight="2"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="02dp">
+        android:padding="2dp">
 
         <LinearLayout
             android:id="@+id/leftLayout"
