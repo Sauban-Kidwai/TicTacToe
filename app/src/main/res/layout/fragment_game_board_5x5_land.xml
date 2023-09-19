@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/game_blue">
+
+    <!-- Left Half (40%) -->
+    <LinearLayout
+        android:id="@+id/leftHalf"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_alignParentStart="true"
+        android:padding="2dp">
+
+        <!-- Score Layout (Top 40%) -->
+        <RelativeLayout
+            android:id="@+id/scorelayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="2dp">
+
+            <!-- First Linear Layout (Top) -->
+            <LinearLayout
+                android:id="@+id/player1Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="00dp">
+
+                <!-- Player 1 Text -->
+                <TextView
+                    android:id="@+id/player1Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLAYER 1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:gravity="center" />
+
+                <!-- Score Text -->
+                <TextView
+                    android:id="@+id/player1ScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SCORE"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Second Linear Layout (Middle) -->
+            <LinearLayout
+                android:id="@+id/player2Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="100dp">
+
+                <!-- Player 2 Text -->
+                <TextView
+                    android:id="@+id/player2Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLAYER 2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:gravity="center" />
+
+                <!-- Score Text -->
+                <TextView
+                    android:id="@+id/player2ScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SCORE"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Third Linear Layout (Bottom) -->
+            <LinearLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="200dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!-- Left Button -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/leftButton"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="RESET" />
+
+                <!-- Right Button -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rightButton"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="NEW MATCH" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- Winner Text (Bottom 10%) -->
+        <LinearLayout
+            android:id="@+id/winnertext"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Winner!"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Right Half (60%) -->
+    <RelativeLayout
+        android:id="@+id/rightHalf"
+        android:layout_width="450dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:gravity="center">
+
+
+        <!-- Tic Tac Toe Grid -->
+        <GridLayout
+            android:id="@+id/rightHalf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- First Row -->
+            <!-- Buttons for the first row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="4"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="5"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="6"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="7"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="8"
+                android:background="@android:color/white" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:background="@android:color/white" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="1"
+                android:layout_column="4"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="1"
+                android:layout_column="6"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="1"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button7"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="2"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="3"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="4"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="5"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="6"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button10"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="8"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="3"
+                android:layout_column="0"
+                android:background="@android:color/white" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="3"
+                android:layout_column="2"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="3"
+                android:layout_column="4"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="3"
+                android:layout_column="6"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="3"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button11"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="0"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button12"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="2"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="3"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button13"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="4"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="5"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button14"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="6"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button15"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="8"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="5"
+                android:layout_column="0"
+                android:background="@android:color/white" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="5"
+                android:layout_column="2"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="5"
+                android:layout_column="4"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="5"
+                android:layout_column="6"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="5"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button16"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="0"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="1"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button17"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="2"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="3"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button18"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="4"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="5"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button19"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="6"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button20"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="8"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="7"
+                android:layout_column="0"
+                android:background="@android:color/white" />
+
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="7"
+                android:layout_column="2"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="7"
+                android:layout_column="4"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="7"
+                android:layout_column="6"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_row="7"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button21"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="0"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="1"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button22"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="2"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="3"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button23"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="4"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="5"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button24"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="6"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="7"
+                android:background="@android:color/white" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Button25"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="8"
+                android:layout_column="8"
+                android:background="@color/game_blue"
+                android:onClick="onCellClick"
+                android:text=""
+                android:textSize="24sp" />
+
+
+        </GridLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
