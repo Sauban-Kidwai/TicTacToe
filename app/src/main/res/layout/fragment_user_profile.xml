@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/game_blue"
-    tools:context=".user_profile">
+    android:background="@color/game_blue">
+<!--    tools:context=".user_profile">-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -22,14 +22,14 @@
         app:layout_constraintGuide_percent="0.35"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.65"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/guideline4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"

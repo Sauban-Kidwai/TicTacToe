@@ -125,7 +125,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
 
             <View
                 android:layout_width="4dp"
@@ -140,7 +141,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
 
             <View
                 android:layout_width="4dp"
@@ -155,7 +157,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
         </LinearLayout>
 
         <View
@@ -182,7 +185,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
 
             <View
                 android:layout_width="4dp"
@@ -197,7 +201,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
 
             <View
                 android:layout_width="4dp"
@@ -212,7 +217,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
         </LinearLayout>
 
         <View
@@ -239,7 +245,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
 
             <View
                 android:layout_width="4dp"
@@ -254,7 +261,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
 
             <View
                 android:layout_width="4dp"
@@ -269,7 +277,8 @@
                 android:text=""
                 android:textSize="24sp"
                 android:onClick="onCellClick"
-                android:background="@color/game_blue"/>
+                android:background="@color/game_blue"
+                android:contentDescription="Clear Selection"/>
 
         </LinearLayout>
 
