@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/game_blue"
-    tools:context=".user_profile">
+    android:background="@color/game_blue">
+<!--    tools:context=".user_profile">-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
