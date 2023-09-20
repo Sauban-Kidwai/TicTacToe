@@ -26,6 +26,7 @@
 
             <!-- TextView at the top of the left half -->
             <TextView
+                android:id="@+id/P1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PLAYER 1"
@@ -56,6 +57,7 @@
 
             <!-- TextView at the top of the left half -->
             <TextView
+                android:id="@+id/P2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PLAYER 2"

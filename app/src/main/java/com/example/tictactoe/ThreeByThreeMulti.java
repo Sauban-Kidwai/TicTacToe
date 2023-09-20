@@ -13,6 +13,14 @@ public class ThreeByThreeMulti extends AppCompatActivity {
     private char currentPlayer; // Current player (either 'X' or 'O')
     private char playerOneMarker;
     private char playerTwoMarker;
+    private TextView playerOneTextView;
+    private TextView playerTwoTextView;
+
+    private TextView playerOneScoreTextView;
+    private TextView playerTwoScoreTextView;
+
+    private int playerOneScore;
+    private int playerTwoScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,18 @@ public class ThreeByThreeMulti extends AppCompatActivity {
         buttons[2][1] = findViewById(R.id.Button8);
         buttons[2][2] = findViewById(R.id.Button9);
 
+        // Initialize player text views
+        playerOneTextView = findViewById(R.id.P1);
+        playerTwoTextView = findViewById(R.id.P2);
+
+        // Initialize score text views
+        playerOneScoreTextView = findViewById(R.id.P1score);
+        playerTwoScoreTextView = findViewById(R.id.P2score);
+
+        // Set initial player text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.black));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
         // Set click listeners for each grid cell
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -71,7 +91,17 @@ public class ThreeByThreeMulti extends AppCompatActivity {
             // Check for a win or a draw
             if (checkWin(currentPlayer)) {
                 // Handle the game result (player wins)
-                showGameResult("Player " + (currentPlayer == playerOneMarker ? "1" : "2") + " wins!");
+                int winningPlayer = (currentPlayer == playerOneMarker) ? 1 : 2;
+                showGameResult("Player " + winningPlayer + " wins!");
+
+                // Update the score and display it
+                if (winningPlayer == 1) {
+                    playerOneScore++;
+                } else {
+                    playerTwoScore++;
+                }
+                updateScores();
+
                 disableAllButtons();
             } else if (isBoardFull()) {
                 // (draw)
@@ -79,9 +109,24 @@ public class ThreeByThreeMulti extends AppCompatActivity {
             } else {
                 // Switch to the next player
                 currentPlayer = (currentPlayer == playerOneMarker) ? playerTwoMarker : playerOneMarker;
+
+                // Update text color based on the current player
+                if (currentPlayer == playerOneMarker) {
+                    playerOneTextView.setTextColor(getResources().getColor(R.color.black));
+                    playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+                } else {
+                    playerOneTextView.setTextColor(getResources().getColor(R.color.white));
+                    playerTwoTextView.setTextColor(getResources().getColor(R.color.black));
+                }
             }
         }
     }
+    // Update the score text views
+    private void updateScores() {
+        playerOneScoreTextView.setText("Score: " + playerOneScore);
+        playerTwoScoreTextView.setText("Score: " + playerTwoScore);
+    }
+
     // Check if the current player has won
     private boolean checkWin(char player) {
         // Check rows
