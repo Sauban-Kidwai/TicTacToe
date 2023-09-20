@@ -52,7 +52,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setGridSize(3);
-                markerCount = 3; //marker count for 3x3 board
 
                 // marker four and five will be invisible
                 four.setVisibility(View.INVISIBLE);
@@ -89,7 +88,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setMarker(3);
-                markerCount = 3;
+                markerCount = marks;
                 // set market to do something
                 markFour.setVisibility(View.INVISIBLE);
                 markFive.setVisibility(View.INVISIBLE);
@@ -100,6 +99,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setMarker(4);
+                markerCount = marks;
                 // set market to do something
                 markThree.setVisibility(View.INVISIBLE);
                 markFive.setVisibility(View.INVISIBLE);
@@ -110,6 +110,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setMarker(5);
+                markerCount = marks;
                 // set market to do something
                 markThree.setVisibility(View.INVISIBLE);
                 markFour.setVisibility(View.INVISIBLE);
@@ -166,11 +167,11 @@ public class SinglePlayerActivity extends AppCompatActivity {
         }
         else if(gridSize == 5)
         {
-            intent = new Intent(this, FivebyFive.class);
+            intent = new Intent(this, FiveByFive.class);
         }
         intent.putExtra("playerOneElement", playerOneElement);
         intent.putExtra("playerTwoElement", playerTwoElement);
-        intent.putExtra("markerCount", markerCount);
+        intent.putExtra("markersToWin", markerCount);
         intent.putExtra("startingPlayer", startingPlayer);
         startActivity(intent);
     }
