@@ -35,9 +35,10 @@
 
             <!-- TextView underneath the first one in the left half -->
             <TextView
+                android:id="@+id/P1score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCORE"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:gravity="center" />
@@ -64,9 +65,10 @@
 
             <!-- TextView underneath the first one in the left half -->
             <TextView
+                android:id="@+id/P2score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCORE"
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:gravity="center" />
@@ -301,7 +303,6 @@
                     android:background="@android:color/white" />
 
 
-
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Button7"
                     android:layout_width="80dp"
@@ -372,9 +373,10 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/winnerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Winner!"
+            android:text=""
             android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:gravity="center" />
