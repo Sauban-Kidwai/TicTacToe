@@ -85,7 +85,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
                 markThree.setVisibility(View.INVISIBLE);
                 markFour.setVisibility(View.INVISIBLE);
             }
-
         });
 
         playerOneX.setOnClickListener(new View.OnClickListener() {
