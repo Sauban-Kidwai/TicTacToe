@@ -206,26 +206,26 @@ public class FiveByFive extends AppCompatActivity {
 
         // Check rows
         for (int i = 0; i < 5; i++) {
-            int markerCount = 0;
+            int m = 0;
             for (int j = 0; j < 5; j++) {
                 if (board[i][j] == player) {
-                    markerCount++;
+                    m++;
                 }
             }
-            if (markerCount == markersToWin) {
+            if (m == markersToWin) {
                 winner = true; // Player has won in this row
             }
         }
 
         // Check columns
         for (int j = 0; j < 5; j++) {
-            int markerCount = 0;
+            int m = 0;
             for (int i = 0; i < 5; i++) {
                 if (board[i][j] == player) {
-                    markerCount++;
+                    m++;
                 }
             }
-            if (markerCount == markersToWin) {
+            if (m == markersToWin) {
                 winner = true; // Player has won in this column
             }
         }

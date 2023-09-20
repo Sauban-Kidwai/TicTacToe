@@ -197,26 +197,26 @@ public class FourByFour extends AppCompatActivity {
 
         // Check rows
         for (int i = 0; i < 4; i++) { // Change to 4x4
-            int markerCount = 0;
+            int m = 0;
             for (int j = 0; j < 4; j++) { // Change to 4x4
                 if (board[i][j] == player) {
-                    markerCount++;
+                    m++;
                 }
             }
-            if (markerCount == markersToWin) {
+            if (m == markersToWin) {
                 winner = true; // Player has won in this row
             }
         }
 
         // Check columns
         for (int j = 0; j < 4; j++) { // Change to 4x4
-            int markerCount = 0;
+            int m = 0;
             for (int i = 0; i < 4; i++) { // Change to 4x4
                 if (board[i][j] == player) {
-                    markerCount++;
+                    m++;
                 }
             }
-            if (markerCount == markersToWin) {
+            if (m == markersToWin) {
                 winner = true; // Player has won in this column
             }
         }
