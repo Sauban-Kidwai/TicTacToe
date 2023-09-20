@@ -10,16 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MultiPlayerActivity extends AppCompatActivity {
 
-    MainActivity main;
-    private boolean gameType;
-    private int marks;
-    private int gridSize;
-    private char playerOneElement;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_settings_screen_2player);
+        setContentView(R.layout.fragment_settings_screen_singleplayer);
 
         int orientation = getResources().getConfiguration().orientation;
 
@@ -36,95 +30,34 @@ public class MultiPlayerActivity extends AppCompatActivity {
         Button four = findViewById(R.id.board_4x4_button);
         Button five = findViewById(R.id.board_5x5_button);
 
-        // Buttons for markers
-        Button markThree = findViewById(R.id.threemarker);
-        Button markFour = findViewById(R.id.fourmarker);
-        Button markFive = findViewById(R.id.fivemarker);
-
-        // Buttons for player 1 x or o, the second player will get what's left
-        Button playerOneX = findViewById(R.id.PlayeroneX);
-        Button playerOneO = findViewById(R.id.PlayeroneO);
-
         // OnClickListener button
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setGridSize(3);
-
-                // marker four and five will be invisible
-                four.setVisibility(View.INVISIBLE);
-                five.setVisibility(View.INVISIBLE);
-                markFour.setVisibility(View.INVISIBLE);
-                markFive.setVisibility(View.INVISIBLE);
+                // When the button is clicked, start the new activity
+                Intent intent = new Intent(MultiPlayerActivity.this, ThreeByThree.class);
+                startActivity(intent);
             }
         });
 
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setGridSize(4);
-
-                // marker three and five will be invisible
-                three.setVisibility(View.INVISIBLE);
-                five.setVisibility(View.INVISIBLE);
-                markFive.setVisibility(View.INVISIBLE);
+                // When the button is clicked, start the new activity
+                Intent intent = new Intent(MultiPlayerActivity.this, FourByFour.class);
+                startActivity(intent);
             }
         });
 
+        //five by five
         five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setGridSize(5);
-
-                // marker three and four will be invisible
-                three.setVisibility(View.INVISIBLE);
-                four.setVisibility(View.INVISIBLE);
+                // When the button is clicked, start the new activity
+                Intent intent = new Intent(MultiPlayerActivity.this, FivebyFive.class);
+                startActivity(intent);
             }
         });
-
-        playerOneX.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setPlayerOneElement('X');
-            }
-        });
-
-
-        playerOneO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setPlayerOneElement('O');
-            }
-        });
-
     }
 
-    public boolean getGameType() {
-        gameType = main.getSinglePlayer();
-        return gameType;
-    }
-
-    public void setMarker(int m) {
-        marks = m;
-    }
-
-    public int getMarker() {
-        return marks;
-    }
-
-    public void setPlayerOneElement(char e) {
-        playerOneElement = e;
-    }
-
-    public char getPlayerOneElement() {
-        return playerOneElement;
-    }
-
-    public void setGridSize(int s) {
-        gridSize = s;
-    }
-
-    public int getGridSize() {
-        return gridSize;
-    }
 }
