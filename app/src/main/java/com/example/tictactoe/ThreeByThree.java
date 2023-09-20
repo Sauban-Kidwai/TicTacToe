@@ -1,26 +1,31 @@
 package com.example.tictactoe;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.Random;
+import android.os.Handler;
 
 public class ThreeByThree extends AppCompatActivity {
-
-    private GridLayout gridLayout;
     private char[][] board; // 3x3 Tic-Tac-Toe board
-    private char currentPlayer;
-    private int marksToWin;
+    private char currentPlayer; // Current player (either 'X' or 'O')
+    private char playerOneMarker;
+    private char playerTwoMarker;
+    private int markersToWin;
+    private TextView playerOneTextView;
+    private TextView playerTwoTextView;
 
+    private TextView playerOneScoreTextView;
+    private TextView playerTwoScoreTextView;
+
+    private int playerOneScore;
+    private int playerTwoScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_game_board_3x3);
 
         int orientation = getResources().getConfiguration().orientation;
 
@@ -34,7 +39,14 @@ public class ThreeByThree extends AppCompatActivity {
 
         // Initialize the game board
         board = new char[3][3];
-        currentPlayer = getIntent().getCharExtra("playerOneElement", 'X'); // Start with player one's marker
+        char initialPlayerMarker = getIntent().getCharExtra("startingPlayer", 'X'); // Get the starting player
+        playerOneMarker = getIntent().getCharExtra("playerOneElement", 'X');
+        playerTwoMarker = getIntent().getCharExtra("playerTwoElement", 'O');
+        // Initialize currentPlayer based on the starting player
+        currentPlayer = initialPlayerMarker;
+
+        //Initialize how many markers to win game
+        markersToWin = getIntent().getIntExtra("markersToWin", 3); // Default to 3 in case of missing intent extra
 
         // Initialize the buttons for each grid cell and set click listeners
         Button[][] buttons = new Button[3][3];
@@ -48,22 +60,17 @@ public class ThreeByThree extends AppCompatActivity {
         buttons[2][1] = findViewById(R.id.Button8);
         buttons[2][2] = findViewById(R.id.Button9);
 
-        gridLayout = findViewById(R.id.rightHalfgrid);
-        marksToWin = getIntent().getIntExtra("marksToWin", 3);
-        setContentView(R.layout.fragment_game_board_3x3);
+        // Initialize player text views
+        playerOneTextView = findViewById(R.id.P1);
+        playerTwoTextView = findViewById(R.id.P2);
 
-        final TextView textView = findViewById(R.id.countdown);
+        // Initialize score text views
+        playerOneScoreTextView = findViewById(R.id.P1score);
+        playerTwoScoreTextView = findViewById(R.id.P2score);
 
-        new CountDownTimer(60000, 1000) { // 60 seconds (1 minute) countdown
-            public void onTick(long millisUntilFinished) {
-                textView.setText(String.valueOf(millisUntilFinished / 1000));
-            }
-
-            public void onFinish() {
-                textView.setText("FINISH!!");
-            }
-        }.start();
-
+        // Set initial player text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
 
         // Set click listeners for each grid cell
         for (int i = 0; i < 3; i++) {
@@ -87,85 +94,168 @@ public class ThreeByThree extends AppCompatActivity {
             button.setText(String.valueOf(currentPlayer));
 
             // Check for a win or a draw
-            if (checkWin(row, col, currentPlayer)) {
+            if (checkWin(currentPlayer)) {
                 // Handle the game result (player wins)
-                showGameResult(currentPlayer + " wins!");
+                int winningPlayer = (currentPlayer == playerOneMarker) ? 1 : 2;
+                showGameResult("Player " + winningPlayer + " wins!");
+
+                // Update the score and display it
+                if (winningPlayer == 1) {
+                    playerOneScore++;
+                } else {
+                    playerTwoScore++;
+                }
+                updateScores();
+
                 disableAllButtons();
             } else if (isBoardFull()) {
-                // Handle the game result (draw)
+                // (draw)
                 showGameResult("It's a draw!");
             } else {
                 // Switch to the next player
-                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+                currentPlayer = (currentPlayer == playerOneMarker) ? playerTwoMarker : playerOneMarker;
+
+                // Update text color based on the current player
+                if (currentPlayer == playerOneMarker) {
+                    playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+                    playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+                } else {
+                    playerOneTextView.setTextColor(getResources().getColor(R.color.white));
+                    playerTwoTextView.setTextColor(getResources().getColor(R.color.red));
+                }
+
+                // Check if it's AI's turn (playerTwo)
+                if (currentPlayer == playerTwoMarker) {
+                    makeAIMove(); // Call the AI move function
+                }
             }
         }
     }
 
-    // Check if the current player has won
-    private boolean checkWin(int row, int col, char player) {
-        // Check rows
-        for (int i = 0; i < board.length; i++) {
-            if (board[i][col] != player) {
-                break;
+    // AI Move (Random)
+    private void makeAIMove() {
+        // Disable all grid cell buttons
+        disableAllButtons();
+
+        // Check for empty cells and make a random move
+        Random random = new Random();
+        final int[] move = new int[2]; // Declare final array to store row and col
+
+        do {
+            move[0] = random.nextInt(3);
+            move[1] = random.nextInt(3);
+        } while (board[move[0]][move[1]] != '\0');
+
+        // Simulate a delay to make the AI move visible
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int aiRow = move[0]; // Extract row from the final array
+                int aiCol = move[1]; // Extract col from the final array
+                Button aiButton = findViewById(getResources().getIdentifier("Button" + (aiRow * 3 + aiCol + 1), "id", getPackageName()));
+                onCellClick(aiRow, aiCol, aiButton); // Simulate AI's click
+
+                // Check if no one has won yet, then re-enable buttons
+                if (!checkWin(currentPlayer)) {
+                    enableAllButtons();
+                }
             }
-            if (i == board.length - 1) {
-                return true; // Player has won in this column
+        }, 1000); // Adjust the delay duration as needed
+    }
+
+    // Update the score text views
+    private void updateScores() {
+        playerOneScoreTextView.setText("Score: " + playerOneScore);
+        playerTwoScoreTextView.setText("Score: " + playerTwoScore);
+    }
+
+    // Check if the current player has won
+    private boolean checkWin(char player) {
+        boolean winner = false;
+        int diagonal = 0;
+        int antidiagonal = 0;
+
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            int markerCount = 0;
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == player) {
+                    markerCount++;
+                }
+            }
+            if (markerCount == markersToWin) {
+                winner = true; // Player has won in this row
             }
         }
 
         // Check columns
-        for (int j = 0; j < board[0].length; j++) {
-            if (board[row][j] != player) {
-                break;
-            }
-            if (j == board[0].length - 1) {
-                return true; // Player has won in this row
-            }
-        }
-
-        // Check diagonal (top-left to bottom-right)
-        if (row == col) {
-            for (int i = 0; i < board.length; i++) {
-                if (board[i][i] != player) {
-                    break;
+        for (int j = 0; j < 3; j++) {
+            int markerCount = 0;
+            for (int i = 0; i < 3; i++) {
+                if (board[i][j] == player) {
+                    markerCount++;
                 }
-                if (i == board.length - 1) {
-                    return true; // Player has won in this diagonal
-                }
+            }
+            if (markerCount == markersToWin) {
+                winner = true; // Player has won in this column
             }
         }
 
-        // Check anti-diagonal (top-right to bottom-left)
-        if (row + col == board.length - 1) {
-            for (int i = 0; i < board.length; i++) {
-                if (board[i][board.length - 1 - i] != player) {
-                    break;
-                }
-                if (i == board.length - 1) {
-                    return true; // Player has won in this anti-diagonal
-                }
+        // Check diagonals
+        for (int i = 0; i < 3; i++) {
+            if (board[i][i] == player) {
+                diagonal++;
+            }
+            if (board[i][2 - i] == player) {
+                antidiagonal++;
             }
         }
 
-        return false; // No win detected
+        if (diagonal == markersToWin || antidiagonal == markersToWin) {
+            winner = true; // Player has won in a diagonal
+        }
+
+        return winner; // No win detected
     }
 
-    // Check if the board is full >> draw
+
+
+    // Check if the board is full (a draw)
     private boolean isBoardFull() {
+        boolean full = true;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (board[i][j] == '\0') {
-                    return false; // There's an empty cell, the board is not full
+                    full = false; // There's an empty cell, the board is not full
                 }
             }
         }
-        return true; // All cells are filled, it's a draw
+        return full; // All cells are filled, it's a draw
     }
-    // Show the game result
+
+    // Show the game result (you can customize this)
     private void showGameResult(String message) {
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText(message);
+
     }
 
     // Disable all grid cell buttons
     private void disableAllButtons() {
+        for (int i = 1; i <= 9; i++) {
+            int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
+            Button button = findViewById(buttonId);
+            button.setEnabled(false);
+        }
+    }
+
+    // Enable all grid cell buttons
+    private void enableAllButtons() {
+        for (int i = 1; i <= 9; i++) {
+            int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
+            Button button = findViewById(buttonId);
+            button.setEnabled(true);
+        }
     }
 }
