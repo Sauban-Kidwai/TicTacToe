@@ -28,7 +28,7 @@
         <activity android:name=".MultiPlayerActivity"/>
         <activity android:name=".ThreeByThree" />
         <activity android:name=".FourByFour" />
-        <activity android:name=".FivebyFive" />
+        <activity android:name=".FiveByFive" />
         <activity android:name=".ThreeByThreeMulti" />
         <activity android:name=".FourByFourMulti" />
         <activity android:name=".FiveByFiveMulti" />

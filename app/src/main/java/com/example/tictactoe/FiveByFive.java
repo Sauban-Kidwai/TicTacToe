@@ -3,15 +3,15 @@ package com.example.tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.os.CountDownTimer;
 import java.util.Random;
 import android.os.Handler;
 
-public class FourByFour extends AppCompatActivity {
-    private char[][] board; // 4x4 Tic-Tac-Toe board
+public class FiveByFive extends AppCompatActivity {
+    private char[][] board; // 5x5 Tic-Tac-Toe board
     private char currentPlayer; // Current player (either 'X' or 'O')
     private char playerOneMarker;
     private char playerTwoMarker;
@@ -34,41 +34,50 @@ public class FourByFour extends AppCompatActivity {
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // Load the landscape layout
-            setContentView(R.layout.fragment_game_board_4x4_lands);
+            setContentView(R.layout.fragment_game_board_5x5_land);
         } else {
             // Load the portrait layout
-            setContentView(R.layout.fragment_game_board_4x4);
+            setContentView(R.layout.fragment_game_board_5x5);
         }
 
         // Initialize the game board
-        board = new char[4][4]; // Change to 4x4
+        board = new char[5][5];
         char initialPlayerMarker = getIntent().getCharExtra("startingPlayer", 'X'); // Get the starting player
         playerOneMarker = getIntent().getCharExtra("playerOneElement", 'X');
         playerTwoMarker = getIntent().getCharExtra("playerTwoElement", 'O');
         // Initialize currentPlayer based on the starting player
         currentPlayer = initialPlayerMarker;
 
-        // Initialize how many markers to win game
+        // Initialize how many markers to win the game
         markersToWin = getIntent().getIntExtra("markersToWin", 3); // Default to 3 in case of missing intent extra
 
         // Initialize the buttons for each grid cell and set click listeners
-        Button[][] buttons = new Button[4][4]; // Change to 4x4
+        Button[][] buttons = new Button[5][5];
         buttons[0][0] = findViewById(R.id.Button1);
         buttons[0][1] = findViewById(R.id.Button2);
         buttons[0][2] = findViewById(R.id.Button3);
         buttons[0][3] = findViewById(R.id.Button4);
-        buttons[1][0] = findViewById(R.id.Button5);
-        buttons[1][1] = findViewById(R.id.Button6);
-        buttons[1][2] = findViewById(R.id.Button7);
-        buttons[1][3] = findViewById(R.id.Button8);
-        buttons[2][0] = findViewById(R.id.Button9);
-        buttons[2][1] = findViewById(R.id.Button10);
-        buttons[2][2] = findViewById(R.id.Button11);
-        buttons[2][3] = findViewById(R.id.Button12);
-        buttons[3][0] = findViewById(R.id.Button13);
-        buttons[3][1] = findViewById(R.id.Button14);
-        buttons[3][2] = findViewById(R.id.Button15);
-        buttons[3][3] = findViewById(R.id.Button16); // Add Buttons 13-16
+        buttons[0][4] = findViewById(R.id.Button5);
+        buttons[1][0] = findViewById(R.id.Button6);
+        buttons[1][1] = findViewById(R.id.Button7);
+        buttons[1][2] = findViewById(R.id.Button8);
+        buttons[1][3] = findViewById(R.id.Button9);
+        buttons[1][4] = findViewById(R.id.Button10);
+        buttons[2][0] = findViewById(R.id.Button11);
+        buttons[2][1] = findViewById(R.id.Button12);
+        buttons[2][2] = findViewById(R.id.Button13);
+        buttons[2][3] = findViewById(R.id.Button14);
+        buttons[2][4] = findViewById(R.id.Button15);
+        buttons[3][0] = findViewById(R.id.Button16);
+        buttons[3][1] = findViewById(R.id.Button17);
+        buttons[3][2] = findViewById(R.id.Button18);
+        buttons[3][3] = findViewById(R.id.Button19);
+        buttons[3][4] = findViewById(R.id.Button20);
+        buttons[4][0] = findViewById(R.id.Button21);
+        buttons[4][1] = findViewById(R.id.Button22);
+        buttons[4][2] = findViewById(R.id.Button23);
+        buttons[4][3] = findViewById(R.id.Button24);
+        buttons[4][4] = findViewById(R.id.Button25);
 
         // Initialize player text views
         playerOneTextView = findViewById(R.id.P1);
@@ -86,8 +95,8 @@ public class FourByFour extends AppCompatActivity {
         playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
 
         // Set click listeners for each grid cell
-        for (int i = 0; i < 4; i++) { // Change to 4x4
-            for (int j = 0; j < 4; j++) { // Change to 4x4
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 final int row = i;
                 final int col = j;
                 buttons[i][j].setOnClickListener(new View.OnClickListener() {
@@ -161,8 +170,8 @@ public class FourByFour extends AppCompatActivity {
         final int[] move = new int[2]; // Declare final array to store row and col
 
         do {
-            move[0] = random.nextInt(4); // Change to 4x4
-            move[1] = random.nextInt(4); // Change to 4x4
+            move[0] = random.nextInt(5);
+            move[1] = random.nextInt(5);
         } while (board[move[0]][move[1]] != '\0');
 
         // Simulate a delay to make the AI move visible
@@ -172,7 +181,7 @@ public class FourByFour extends AppCompatActivity {
             public void run() {
                 int aiRow = move[0]; // Extract row from the final array
                 int aiCol = move[1]; // Extract col from the final array
-                Button aiButton = findViewById(getResources().getIdentifier("Button" + (aiRow * 4 + aiCol + 1), "id", getPackageName()));
+                Button aiButton = findViewById(getResources().getIdentifier("Button" + (aiRow * 5 + aiCol + 1), "id", getPackageName()));
                 onCellClick(aiRow, aiCol, aiButton); // Simulate AI's click
 
                 // Check if no one has won yet, then re-enable buttons
@@ -196,9 +205,9 @@ public class FourByFour extends AppCompatActivity {
         int antidiagonal = 0;
 
         // Check rows
-        for (int i = 0; i < 4; i++) { // Change to 4x4
+        for (int i = 0; i < 5; i++) {
             int markerCount = 0;
-            for (int j = 0; j < 4; j++) { // Change to 4x4
+            for (int j = 0; j < 5; j++) {
                 if (board[i][j] == player) {
                     markerCount++;
                 }
@@ -209,9 +218,9 @@ public class FourByFour extends AppCompatActivity {
         }
 
         // Check columns
-        for (int j = 0; j < 4; j++) { // Change to 4x4
+        for (int j = 0; j < 5; j++) {
             int markerCount = 0;
-            for (int i = 0; i < 4; i++) { // Change to 4x4
+            for (int i = 0; i < 5; i++) {
                 if (board[i][j] == player) {
                     markerCount++;
                 }
@@ -222,11 +231,11 @@ public class FourByFour extends AppCompatActivity {
         }
 
         // Check diagonals
-        for (int i = 0; i < 4; i++) { // Change to 4x4
+        for (int i = 0; i < 5; i++) {
             if (board[i][i] == player) {
                 diagonal++;
             }
-            if (board[i][3 - i] == player) { // Change to 3-i for 4x4
+            if (board[i][4 - i] == player) {
                 antidiagonal++;
             }
         }
@@ -241,8 +250,8 @@ public class FourByFour extends AppCompatActivity {
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
         boolean full = true;
-        for (int i = 0; i < 4; i++) { // Change to 4x4
-            for (int j = 0; j < 4; j++) { // Change to 4x4
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 if (board[i][j] == '\0') {
                     full = false; // There's an empty cell, the board is not full
                 }
@@ -255,12 +264,11 @@ public class FourByFour extends AppCompatActivity {
     private void showGameResult(String message) {
         TextView winnerTextView = findViewById(R.id.winnerTextView);
         winnerTextView.setText(message);
-
     }
 
     // Disable all grid cell buttons
     private void disableAllButtons() {
-        for (int i = 1; i <= 16; i++) { // Change to 16 for 4x4
+        for (int i = 1; i <= 25; i++) {
             int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
             Button button = findViewById(buttonId);
             button.setEnabled(false);
@@ -269,7 +277,7 @@ public class FourByFour extends AppCompatActivity {
 
     // Enable all grid cell buttons
     private void enableAllButtons() {
-        for (int i = 1; i <= 16; i++) { // Change to 16 for 4x4
+        for (int i = 1; i <= 25; i++) {
             int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
             Button button = findViewById(buttonId);
             button.setEnabled(true);
