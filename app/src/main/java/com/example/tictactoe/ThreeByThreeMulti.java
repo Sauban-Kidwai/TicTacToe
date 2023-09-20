@@ -1,16 +1,31 @@
-
 package com.example.tictactoe;
 
-    import androidx.appcompat.app.AppCompatActivity;
-    import android.content.Intent;
-    import android.content.res.Configuration;
-    import android.os.Bundle;
-    import android.view.View;
-    import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class ThreeByThreeMulti extends AppCompatActivity {
     private char[][] board; // 3x3 Tic-Tac-Toe board
     private char currentPlayer; // Current player (either 'X' or 'O')
+    private char playerOneMarker;
+    private char playerTwoMarker;
+    private TextView playerOneTextView;
+    private TextView playerTwoTextView;
+    private TextView countdownTextView; // Added for the countdown timer
+
+    private TextView playerOneScoreTextView;
+    private TextView playerTwoScoreTextView;
+
+    private int playerOneScore;
+    private int playerTwoScore;
+
+    private CountDownTimer countDownTimer; // Added for the countdown timer
+    private long timeLeftInMillis = 70000; // 70 seconds
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +42,11 @@ public class ThreeByThreeMulti extends AppCompatActivity {
 
         // Initialize the game board
         board = new char[3][3];
-        currentPlayer = getIntent().getCharExtra("playerOneElement", 'X'); // Start with player one's marker
+        char initialPlayerMarker = getIntent().getCharExtra("startingPlayer", 'X'); // Get the starting player
+        playerOneMarker = getIntent().getCharExtra("playerOneElement", 'X');
+        playerTwoMarker = getIntent().getCharExtra("playerTwoElement", 'O');
+        // Initialize currentPlayer based on the starting player
+        currentPlayer = initialPlayerMarker;
 
         // Initialize the buttons for each grid cell and set click listeners
         Button[][] buttons = new Button[3][3];
@@ -41,7 +60,22 @@ public class ThreeByThreeMulti extends AppCompatActivity {
         buttons[2][1] = findViewById(R.id.Button8);
         buttons[2][2] = findViewById(R.id.Button9);
 
-// Set click listeners for each grid cell
+        // Initialize player text views
+        playerOneTextView = findViewById(R.id.P1);
+        playerTwoTextView = findViewById(R.id.P2);
+
+        // Initialize score text views
+        playerOneScoreTextView = findViewById(R.id.P1score);
+        playerTwoScoreTextView = findViewById(R.id.P2score);
+
+        // Initialize countdown timer TextView
+        countdownTextView = findViewById(R.id.countdown);
+
+        // Set initial player text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
+        // Set click listeners for each grid cell
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 final int row = i;
@@ -55,7 +89,11 @@ public class ThreeByThreeMulti extends AppCompatActivity {
                 });
             }
         }
+
+        // Initialize and start the countdown timer
+        startCountdownTimer();
     }
+
     // Handle a player's move
     private void onCellClick(int row, int col, Button button) {
         if (board[row][col] == '\0') { // Check if the cell is empty
@@ -63,27 +101,70 @@ public class ThreeByThreeMulti extends AppCompatActivity {
             button.setText(String.valueOf(currentPlayer));
 
             // Check for a win or a draw
-            if (checkWin(row, col, currentPlayer)) {
+            if (checkWin(currentPlayer)) {
                 // Handle the game result (player wins)
-                showGameResult(currentPlayer + " wins!");
+                int winningPlayer = (currentPlayer == playerOneMarker) ? 1 : 2;
+                showGameResult("Player " + winningPlayer + " wins!");
+
+                // Update the score and display it
+                if (winningPlayer == 1) {
+                    playerOneScore++;
+                } else {
+                    playerTwoScore++;
+                }
+                updateScores();
+
                 disableAllButtons();
+                stopCountdownTimer(); // Stop the timer on game over
             } else if (isBoardFull()) {
-                // Handle the game result (draw)
+                // (draw)
                 showGameResult("It's a draw!");
+                stopCountdownTimer(); // Stop the timer on game over
             } else {
                 // Switch to the next player
-                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+                currentPlayer = (currentPlayer == playerOneMarker) ? playerTwoMarker : playerOneMarker;
+
+                // Update text color based on the current player
+                if (currentPlayer == playerOneMarker) {
+                    playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+                    playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+                } else {
+                    playerOneTextView.setTextColor(getResources().getColor(R.color.white));
+                    playerTwoTextView.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
     }
-    // Check if the current player has won
-    private boolean checkWin(int row, int col, char player) {
-        // Implement your win condition logic here
-        // Check rows, columns, and diagonals
-        // Return true if the player has won, otherwise return false
-        // Example: check rows
-        return (board[row][0] == player && board[row][1] == player && board[row][2] == player);
+
+    // Update the score text views
+    private void updateScores() {
+        playerOneScoreTextView.setText("Score: " + playerOneScore);
+        playerTwoScoreTextView.setText("Score: " + playerTwoScore);
     }
+
+    // Check if the current player has won
+    private boolean checkWin(char player) {
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+                return true;
+            }
+        }
+
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            if (board[0][i] == player && board[1][i] == player && board[2][i] == player) {
+                return true;
+            }
+        }
+
+        // Check diagonals
+        if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+            return true;
+        }
+        return board[0][2] == player && board[1][1] == player && board[2][0] == player; // No win condition
+    }
+
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
         for (int i = 0; i < 3; i++) {
@@ -95,17 +176,15 @@ public class ThreeByThreeMulti extends AppCompatActivity {
         }
         return true; // All cells are filled, it's a draw
     }
+
     // Show the game result (you can customize this)
     private void showGameResult(String message) {
-        // You can display the result in a TextView or customize it as per your UI
-        // For example:
-        // TextView resultTextView = findViewById(R.id.resultTextView);
-        // resultTextView.setText(message);
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText(message);
     }
 
     // Disable all grid cell buttons
     private void disableAllButtons() {
-
         for (int i = 1; i <= 9; i++) {
             int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
             Button button = findViewById(buttonId);
@@ -146,13 +225,8 @@ public class ThreeByThreeMulti extends AppCompatActivity {
     }
 
     @Override
-    // destroy function
     protected void onDestroy() {
         super.onDestroy();
         stopCountdownTimer();
-=======
-        // Disable all buttons to prevent further moves
-        // You can implement this based on your button IDs
-
     }
 }
