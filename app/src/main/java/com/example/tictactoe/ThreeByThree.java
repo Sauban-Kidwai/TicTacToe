@@ -29,7 +29,7 @@ public class ThreeByThree extends AppCompatActivity {
 
         final TextView textView = findViewById(R.id.countdown);
 
-        new CountDownTimer(70000, 1000) { // 60 seconds (1 minute) countdown
+        new CountDownTimer(60000, 1000) { // 60 seconds (1 minute) countdown
             public void onTick(long millisUntilFinished) {
                 textView.setText(String.valueOf(millisUntilFinished / 1000));
             }
