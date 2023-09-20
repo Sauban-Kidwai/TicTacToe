@@ -157,11 +157,44 @@ public class SinglePlayerActivity extends AppCompatActivity {
         gridSize = s;
     }
 
-    public int getGridSize() {
-        return gridSize;
+    // Starts the game depending on the presets chosen
+    public void startGame(int gridSize, int marksToWin, char playerOneElement) {
+        if(gridSize == 3) {
+            Intent intent = new Intent(this, ThreeByThree.class);
+        }
+        else if(gridSize == 4) {
+            Intent intent = new Intent(this, FourByFour.class);
+        }
+        else if(gridSize == 5) {
+            Intent intent = new Intent(this, FivebyFive.class);
+        }
+        Intent intent = new Intent(this, ThreeByThree.class);
+        intent.putExtra("marksToWin", marksToWin);
+        intent.putExtra("playerOneElement", playerOneElement);
+        startActivity(intent);
     }
 
+
     // When gridSize != 0 && playerOneElement != null && marker != 0 >> startActivity(intent)
+    /*
+
+        public void startGame(int gridSize, int marksToWin, char playerOneElement) {
+        Intent intent = new Intent(this, ThreebyThree.class);
+        intent.putExtra("gridSize", gridSize);
+        intent.putExtra("marksToWin", marksToWin);
+        intent.putExtra("playerOneElement", playerOneElement);
+        startActivity(intent);
+    }
+
+    public void startGame(gridSize, marker, playerOneElement) {
+        if(gridSize == 3)
+            startActivity(ThreebyThree.class)
+        else if(gridSize == 4)
+            startActivity(FourbyFour.class)
+        else if(gridSize == 5)
+            startActivity(FivebyFive.class)
+    }
+     */
     /*
     five.setOnClickListener(new View.OnClickListener() {
             @Override
