@@ -159,11 +159,11 @@ public class MultiPlayerActivity extends AppCompatActivity {
 
     private void startGame(char startingPlayer) {
         Intent intent;
-        if (markerCount == 3) {
+        if (gridSize == 3) {
             intent = new Intent(this, ThreeByThreeMulti.class);
-        } else if (markerCount == 4) {
+        } else if (gridSize == 4) {
             intent = new Intent(this, FourByFourMulti.class);
-        } else if (markerCount == 5) {
+        } else if (gridSize == 5) {
             intent = new Intent(this, FiveByFiveMulti.class);
         } else {
             return;
