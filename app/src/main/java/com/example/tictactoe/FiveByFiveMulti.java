@@ -41,7 +41,7 @@ public class FiveByFiveMulti extends AppCompatActivity {
         }
 
         // Initialize the game board
-        board = new char[4][4];
+        board = new char[5][5];
         char initialPlayerMarker = getIntent().getCharExtra("startingPlayer", 'X'); // Get the starting player
         playerOneMarker = getIntent().getCharExtra("playerOneElement", 'X');
         playerTwoMarker = getIntent().getCharExtra("playerTwoElement", 'O');
@@ -54,18 +54,21 @@ public class FiveByFiveMulti extends AppCompatActivity {
         buttons[0][1] = findViewById(R.id.Button2);
         buttons[0][2] = findViewById(R.id.Button3);
         buttons[0][3] = findViewById(R.id.Button4);
-        buttons[1][0] = findViewById(R.id.Button5);
-        buttons[1][1] = findViewById(R.id.Button6);
-        buttons[1][2] = findViewById(R.id.Button7);
-        buttons[1][3] = findViewById(R.id.Button8);
-        buttons[2][0] = findViewById(R.id.Button9);
-        buttons[2][1] = findViewById(R.id.Button10);
-        buttons[2][2] = findViewById(R.id.Button11);
-        buttons[2][3] = findViewById(R.id.Button12);
-        buttons[3][0] = findViewById(R.id.Button13);
-        buttons[3][1] = findViewById(R.id.Button14);
-        buttons[3][2] = findViewById(R.id.Button15);
-        buttons[3][3] = findViewById(R.id.Button16);
+        buttons[0][4] = findViewById(R.id.Button5);
+        buttons[1][0] = findViewById(R.id.Button6);
+        buttons[1][1] = findViewById(R.id.Button7);
+        buttons[1][2] = findViewById(R.id.Button8);
+        buttons[1][3] = findViewById(R.id.Button9);
+        buttons[1][4] = findViewById(R.id.Button10);
+        buttons[2][0] = findViewById(R.id.Button11);
+        buttons[2][1] = findViewById(R.id.Button12);
+        buttons[2][2] = findViewById(R.id.Button13);
+        buttons[2][3] = findViewById(R.id.Button14);
+        buttons[2][4] = findViewById(R.id.Button15);
+        buttons[3][0] = findViewById(R.id.Button16);
+        buttons[3][1] = findViewById(R.id.Button17);
+        buttons[3][2] = findViewById(R.id.Button18);
+        buttons[3][3] = findViewById(R.id.Button19);
         buttons[3][4] = findViewById(R.id.Button20);
         buttons[4][0] = findViewById(R.id.Button21);
         buttons[4][1] = findViewById(R.id.Button22);
@@ -88,8 +91,8 @@ public class FiveByFiveMulti extends AppCompatActivity {
         playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
 
         // Set click listeners for each grid cell
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 final int row = i;
                 final int col = j;
                 buttons[i][j].setOnClickListener(new View.OnClickListener() {
@@ -194,7 +197,7 @@ public class FiveByFiveMulti extends AppCompatActivity {
 
     // Disable all grid cell buttons
     private void disableAllButtons() {
-        for (int i = 1; i <= 16; i++) {
+        for (int i = 1; i <= 25; i++) {
             int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
             Button button = findViewById(buttonId);
             button.setEnabled(false);
