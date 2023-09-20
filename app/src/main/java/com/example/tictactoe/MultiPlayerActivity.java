@@ -48,6 +48,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
         Button playerOneX = findViewById(R.id.PlayeroneX);
         Button playerOneO = findViewById(R.id.PlayeroneO);
 
+
         // OnClickListener button
         three.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +102,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setMarker(4);
+                markerCount = 4;
                 // set market to do something
                 markThree.setVisibility(View.INVISIBLE);
                 markFive.setVisibility(View.INVISIBLE);
@@ -111,6 +113,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setMarker(5);
+                markerCount = 5;
                 // set market to do something
                 markThree.setVisibility(View.INVISIBLE);
                 markFour.setVisibility(View.INVISIBLE);
@@ -121,7 +124,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setPlayerElements('X', 'O');
-                startGame();
+                startGame('X');
             }
         });
 
@@ -130,7 +133,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setPlayerElements('O', 'X');
-                startGame();
+                startGame('O');
             }
         });
 
@@ -145,6 +148,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
     public void setMarker(int m) {
         marks = m;
     }
+
     public char getPlayerOneElement() {
         return playerOneElement;
     }
@@ -153,16 +157,23 @@ public class MultiPlayerActivity extends AppCompatActivity {
         gridSize = s;
     }
 
-    private void startGame() {
-        Intent intent = new Intent(this, ThreeByThreeMulti.class);
+    private void startGame(char startingPlayer) {
+        Intent intent;
+        if (markerCount == 3) {
+            intent = new Intent(this, ThreeByThreeMulti.class);
+        } else if (markerCount == 4) {
+            intent = new Intent(this, FourByFourMulti.class);
+        } else if (markerCount == 5) {
+            intent = new Intent(this, FiveByFiveMulti.class);
+        } else {
+            return;
+        }
+
         intent.putExtra("gridSize", gridSize);
         intent.putExtra("playerOneElement", playerOneElement);
         intent.putExtra("playerTwoElement", playerTwoElement);
         intent.putExtra("markerCount", markerCount);
+        intent.putExtra("startingPlayer", startingPlayer);
         startActivity(intent);
-    }
-
-    public int getGridSize() {
-        return gridSize;
     }
 }

@@ -12,9 +12,9 @@ public class SinglePlayerActivity extends AppCompatActivity {
     // Temp 2
     MainActivity main;
     private boolean gameType;
-    private int marks = 0;
-    private int gridSize = 0;
-    private char playerOneElement = ' ';
+    private int marks;
+    private int gridSize;
+    private char playerOneElement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         markThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setMarks(3);
+                setMarker(3);
                 // set market to do something
                 markFour.setVisibility(View.INVISIBLE);
                 markFive.setVisibility(View.INVISIBLE);
@@ -97,7 +97,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         markFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setMarks(4);
+                setMarker(4);
                 // set market to do something
                 markThree.setVisibility(View.INVISIBLE);
                 markFive.setVisibility(View.INVISIBLE);
@@ -107,7 +107,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         markFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setMarks(5);
+                setMarker(5);
                 // set market to do something
                 markThree.setVisibility(View.INVISIBLE);
                 markFour.setVisibility(View.INVISIBLE);
@@ -119,9 +119,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setPlayerOneElement('X');
-                playerOneO.setVisibility(View.INVISIBLE);
-                if(marks != 0 && gridSize != 0)
-                    startGame();
             }
         });
 
@@ -130,11 +127,9 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setPlayerOneElement('O');
-                playerOneX.setVisibility(View.INVISIBLE);
-                if(marks != 0 && gridSize != 0)
-                    startGame();
             }
         });
+
     }
 
     public boolean getGameType() {
@@ -142,7 +137,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         return gameType;
     }
 
-    public void setMarks(int m) {
+    public void setMarker(int m) {
         marks = m;
     }
 
@@ -163,9 +158,18 @@ public class SinglePlayerActivity extends AppCompatActivity {
     }
 
     // Starts the game depending on the presets chosen
-    public void startGame() {
+    public void startGame(int gridSize, int marksToWin, char playerOneElement) {
+        if(gridSize == 3) {
+            Intent intent = new Intent(this, ThreeByThree.class);
+        }
+        else if(gridSize == 4) {
+            Intent intent = new Intent(this, FourByFour.class);
+        }
+        else if(gridSize == 5) {
+            Intent intent = new Intent(this, FivebyFive.class);
+        }
         Intent intent = new Intent(this, ThreeByThree.class);
-        intent.putExtra("marksToWin", marks);
+        intent.putExtra("marksToWin", marksToWin);
         intent.putExtra("playerOneElement", playerOneElement);
         startActivity(intent);
     }
