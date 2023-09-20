@@ -11,7 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
-
+    // Temp 1
+    private boolean singlePlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         singlePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Temp 1.1
+                setSinglePlayer(true);
                 // When the button is clicked, start the new activity
                 Intent intent = new Intent(MainActivity.this, SinglePlayerActivity.class);
                 startActivity(intent);
@@ -44,10 +47,21 @@ public class MainActivity extends AppCompatActivity {
         multiPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Temp 1.2
+                setSinglePlayer(false);
                 // When the button is clicked, start the new activity
                 Intent intent = new Intent(MainActivity.this, MultiPlayerActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    // Temp 1.1
+    public void setSinglePlayer(boolean s) {
+        singlePlayer = s;
+    }
+    // Temp 1.2
+    public boolean getSinglePlayer() {
+        return singlePlayer;
     }
 }
