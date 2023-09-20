@@ -41,7 +41,7 @@ public class ThreeByThreeMulti extends AppCompatActivity {
         buttons[2][1] = findViewById(R.id.Button8);
         buttons[2][2] = findViewById(R.id.Button9);
 
-// Set click listeners for each grid cell
+    // Set click listeners for each grid cell
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 final int row = i;
@@ -78,12 +78,31 @@ public class ThreeByThreeMulti extends AppCompatActivity {
     }
     // Check if the current player has won
     private boolean checkWin(int row, int col, char player) {
-        // Implement your win condition logic here
-        // Check rows, columns, and diagonals
-        // Return true if the player has won, otherwise return false
-        // Example: check rows
-        return (board[row][0] == player && board[row][1] == player && board[row][2] == player);
+        boolean hasWon = false;
+
+        // Check row
+        if (board[row][0] == player && board[row][1] == player && board[row][2] == player) {
+            hasWon = true;
+        }
+
+        // Check column
+        if (board[0][col] == player && board[1][col] == player && board[2][col] == player) {
+            hasWon = true;
+        }
+
+        // Check diagonal (top-left to bottom-right)
+        if (row == col && board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+            hasWon = true;
+        }
+
+        // Check diagonal (top-right to bottom-left)
+        if (row + col == 2 && board[0][2] == player && board[1][1] == player && board[2][0] == player) {
+            hasWon = true;
+        }
+
+        return hasWon;
     }
+
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
         for (int i = 0; i < 3; i++) {
