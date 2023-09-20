@@ -14,6 +14,8 @@ public class FourByFourMulti extends AppCompatActivity {
     private char currentPlayer; // Current player (either 'X' or 'O')
     private char playerOneMarker;
     private char playerTwoMarker;
+
+    private int markerCount;
     private TextView playerOneTextView;
     private TextView playerTwoTextView;
 
@@ -48,6 +50,9 @@ public class FourByFourMulti extends AppCompatActivity {
         playerTwoMarker = getIntent().getCharExtra("playerTwoElement", 'O');
         // Initialize currentPlayer based on the starting player
         currentPlayer = initialPlayerMarker;
+
+        // Initialize how many markers to win game
+        markerCount = getIntent().getIntExtra("markerCount", 3); // Default to 3 in case of missing intent extra
 
         // Initialize the buttons for each grid cell and set click listeners
         Button[][] buttons = new Button[4][4];
@@ -150,26 +155,53 @@ public class FourByFourMulti extends AppCompatActivity {
 
     // Check if the current player has won
     private boolean checkWin(char player) {
+        boolean winner = false;
+        int diagonal = 0;
+        int antidiagonal = 0;
+
         // Check rows
-        for (int i = 0; i < 4; i++) {
-            if (board[i][0] == player && board[i][1] == player && board[i][2] == player && board[i][3] == player) {
-                return true;
+        for (int i = 0; i < 4; i++) { // Change to 4x4
+            int m = 0;
+            for (int j = 0; j < 4; j++) { // Change to 4x4
+                if (board[i][j] == player) {
+                    m++;
+                }
+            }
+            if (m == markerCount) {
+                winner = true; // Player has won in this row
             }
         }
 
         // Check columns
-        for (int i = 0; i < 4; i++) {
-            if (board[0][i] == player && board[1][i] == player && board[2][i] == player && board[3][i] == player) {
-                return true;
+        for (int j = 0; j < 4; j++) { // Change to 4x4
+            int m = 0;
+            for (int i = 0; i < 4; i++) { // Change to 4x4
+                if (board[i][j] == player) {
+                    m++;
+                }
+            }
+            if (m == markerCount) {
+                winner = true; // Player has won in this column
             }
         }
 
         // Check diagonals
-        if (board[0][0] == player && board[1][1] == player && board[2][2] == player && board[3][3] == player) {
-            return true;
+        for (int i = 0; i < 4; i++) { // Change to 4x4
+            if (board[i][i] == player) {
+                diagonal++;
+            }
+            if (board[i][3 - i] == player) { // Change to 3-i for 4x4
+                antidiagonal++;
+            }
         }
-        return board[0][3] == player && board[1][2] == player && board[2][1] == player && board[3][0] == player;// No win condition
+
+        if (diagonal == markerCount || antidiagonal == markerCount) {
+            winner = true; // Player has won in a diagonal
+        }
+
+        return winner; // No win detected
     }
+
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
         for (int i = 0; i < 4; i++) {

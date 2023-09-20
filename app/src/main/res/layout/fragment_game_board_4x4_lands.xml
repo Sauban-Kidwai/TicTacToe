@@ -38,7 +38,7 @@
 
                 <!-- Player 1 Text -->
                 <TextView
-                    android:id="@+id/player1Text"
+                    android:id="@+id/P1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PLAYER 1"
@@ -48,10 +48,10 @@
 
                 <!-- Score Text -->
                 <TextView
-                    android:id="@+id/player1ScoreText"
+                    android:id="@+id/P1score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:gravity="center" />
@@ -69,7 +69,7 @@
 
                 <!-- Player 2 Text -->
                 <TextView
-                    android:id="@+id/player2Text"
+                    android:id="@+id/P2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PLAYER 2"
@@ -79,10 +79,10 @@
 
                 <!-- Score Text -->
                 <TextView
-                    android:id="@+id/player2ScoreText"
+                    android:id="@+id/P2score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:gravity="center" />
@@ -125,9 +125,10 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/winnerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Winner!"
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:gravity="center" />
