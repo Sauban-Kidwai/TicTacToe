@@ -225,6 +225,7 @@ public class ThreeByThreeMulti extends AppCompatActivity {
     }
 
     @Override
+    // destroy function
     protected void onDestroy() {
         super.onDestroy();
         stopCountdownTimer();
