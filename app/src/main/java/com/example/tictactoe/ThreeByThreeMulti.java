@@ -105,7 +105,54 @@ public class ThreeByThreeMulti extends AppCompatActivity {
 
     // Disable all grid cell buttons
     private void disableAllButtons() {
+
+        for (int i = 1; i <= 9; i++) {
+            int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
+            Button button = findViewById(buttonId);
+            button.setEnabled(false);
+        }
+    }
+
+    // Start the countdown timer
+    private void startCountdownTimer() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountdownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftInMillis = 0;
+                updateCountdownText();
+                // Handle timer finish, e.g., show a message or perform an action
+            }
+        }.start();
+    }
+
+    // Stop the countdown timer
+    private void stopCountdownTimer() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    // Update the countdown timer text
+    private void updateCountdownText() {
+        int seconds = (int) (timeLeftInMillis / 1000);
+        String timeLeft = String.format("%02d:%02d", seconds / 60, seconds % 60);
+        countdownTextView.setText(timeLeft);
+    }
+
+    @Override
+    // destroy function
+    protected void onDestroy() {
+        super.onDestroy();
+        stopCountdownTimer();
+=======
         // Disable all buttons to prevent further moves
         // You can implement this based on your button IDs
+
     }
 }
