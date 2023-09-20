@@ -1,26 +1,28 @@
 package com.example.tictactoe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class SinglePlayerActivity extends AppCompatActivity {
-    // Temp 2
-    MainActivity main;
-    private boolean gameType;
+
     private int marks;
+
     private int gridSize;
+
     private char playerOneElement;
+
+    private char playerTwoElement;
+
+    private int markerCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_settings_screen_singleplayer);
-
         int orientation = getResources().getConfiguration().orientation;
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -31,7 +33,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             setContentView(R.layout.fragment_settings_screen_singleplayer);
         }
 
-        // Find the 3x3 button by its ID /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+        // Find the 3x3 button by its ID
         Button three = findViewById(R.id.board_3x3_button);
         Button four = findViewById(R.id.board_4x4_button);
         Button five = findViewById(R.id.board_5x5_button);
@@ -41,7 +43,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         Button markFour = findViewById(R.id.fourmarker);
         Button markFive = findViewById(R.id.fivemarker);
 
-        // Buttons for player 1 x or o
+        // Buttons for player 1 x or o, the second player will get what's left
         Button playerOneX = findViewById(R.id.PlayeroneX);
         Button playerOneO = findViewById(R.id.PlayeroneO);
 
@@ -50,6 +52,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setGridSize(3);
+                markerCount = 3; //marker count for 3x3 board
 
                 // marker four and five will be invisible
                 four.setVisibility(View.INVISIBLE);
@@ -58,7 +61,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
                 markFive.setVisibility(View.INVISIBLE);
             }
         });
-
 
         four.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +73,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
                 markFive.setVisibility(View.INVISIBLE);
             }
         });
-
 
         five.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +89,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setMarker(3);
+                markerCount = 3;
                 // set market to do something
                 markFour.setVisibility(View.INVISIBLE);
                 markFive.setVisibility(View.INVISIBLE);
@@ -114,11 +116,13 @@ public class SinglePlayerActivity extends AppCompatActivity {
             }
         });
 
-
         playerOneX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setPlayerOneElement('X');
+                setPlayerElements('X', 'O');
+
+                if(getMarker() > 0 && getGridSize() > 0) // Maybe a message saying "Must choose grid size and marks first
+                    startGame('X');
             }
         });
 
@@ -126,15 +130,17 @@ public class SinglePlayerActivity extends AppCompatActivity {
         playerOneO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setPlayerOneElement('O');
+                setPlayerElements('O', 'X');
+                if(getMarker() > 0 && getGridSize() > 0) // Maybe a message saying "Must choose grid size and marks first
+                    startGame('O');
             }
         });
 
     }
 
-    public boolean getGameType() {
-        gameType = main.getSinglePlayer();
-        return gameType;
+    private void setPlayerElements(char playerOneMarker, char playerTwoMarker) {
+        playerOneElement = playerOneMarker;
+        playerTwoElement = playerTwoMarker;
     }
 
     public void setMarker(int m) {
@@ -145,64 +151,27 @@ public class SinglePlayerActivity extends AppCompatActivity {
         return marks;
     }
 
-    public void setPlayerOneElement(char e) {
-        playerOneElement = e;
-    }
-
-    public char getPlayerOneElement() {
-        return playerOneElement;
-    }
-
     public void setGridSize(int s) {
         gridSize = s;
     }
 
-    // Starts the game depending on the presets chosen
-    public void startGame(int gridSize, int marksToWin, char playerOneElement) {
-        if(gridSize == 3) {
-            Intent intent = new Intent(this, ThreeByThree.class);
-        }
-        else if(gridSize == 4) {
-            Intent intent = new Intent(this, FourByFour.class);
-        }
-        else if(gridSize == 5) {
-            Intent intent = new Intent(this, FivebyFive.class);
-        }
+    public int getGridSize() {
+        return gridSize;
+    }
+
+    private void startGame(char startingPlayer) {
         Intent intent = new Intent(this, ThreeByThree.class);
-        intent.putExtra("marksToWin", marksToWin);
-        intent.putExtra("playerOneElement", playerOneElement);
-        startActivity(intent);
-    }
-
-
-    // When gridSize != 0 && playerOneElement != null && marker != 0 >> startActivity(intent)
-    /*
-
-        public void startGame(int gridSize, int marksToWin, char playerOneElement) {
-        Intent intent = new Intent(this, ThreebyThree.class);
-        intent.putExtra("gridSize", gridSize);
-        intent.putExtra("marksToWin", marksToWin);
-        intent.putExtra("playerOneElement", playerOneElement);
-        startActivity(intent);
-    }
-
-    public void startGame(gridSize, marker, playerOneElement) {
-        if(gridSize == 3)
-            startActivity(ThreebyThree.class)
-        else if(gridSize == 4)
-            startActivity(FourbyFour.class)
+        if(gridSize == 4) {
+            intent = new Intent(this, FourByFour.class);
+        }
         else if(gridSize == 5)
-            startActivity(FivebyFive.class)
+        {
+            intent = new Intent(this, FivebyFive.class);
+        }
+        intent.putExtra("playerOneElement", playerOneElement);
+        intent.putExtra("playerTwoElement", playerTwoElement);
+        intent.putExtra("markerCount", markerCount);
+        intent.putExtra("startingPlayer", startingPlayer);
+        startActivity(intent);
     }
-     */
-    /*
-    five.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // When the button is clicked, start the new activity
-                Intent intent = new Intent(SinglePlayerActivity.this, FivebyFive.class);
-                startActivity(intent);
-            }
-        });
-     */
 }
