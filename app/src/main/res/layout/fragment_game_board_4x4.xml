@@ -40,7 +40,7 @@
                 android:id="@+id/P1score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCORE"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:gravity="center" />
@@ -71,7 +71,7 @@
                 android:id="@+id/P2score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCORE"
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:gravity="center" />
