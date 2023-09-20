@@ -84,6 +84,37 @@ public class SinglePlayerActivity extends AppCompatActivity {
             }
         });
 
+        markThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setMarker(3);
+                // set market to do something
+                markFour.setVisibility(View.INVISIBLE);
+                markFive.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        markFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setMarker(4);
+                // set market to do something
+                markThree.setVisibility(View.INVISIBLE);
+                markFive.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        markFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setMarker(5);
+                // set market to do something
+                markThree.setVisibility(View.INVISIBLE);
+                markFour.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
         playerOneX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

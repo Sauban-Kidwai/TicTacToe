@@ -1,27 +1,18 @@
 package com.example.tictactoe;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.widget.TextView;
+        import androidx.appcompat.app.AppCompatActivity;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
 
 public class ThreeByThree extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_game_board_3x3);
+    private char playerOneElement;
+    private char playerTwoElement;
 
-        final TextView textView = findViewById(R.id.countdown);
 
-        new CountDownTimer(60000, 1000) { // 60 seconds (1 minute) countdown
-            public void onTick(long millisUntilFinished) {
-                textView.setText(String.valueOf(millisUntilFinished / 1000));
-            }
 
-            public void onFinish() {
-                textView.setText("FINISH!!");
-            }
-        }.start();
+        // Add more buttons and logic for the rest of the grid cells...
     }
-}
+
