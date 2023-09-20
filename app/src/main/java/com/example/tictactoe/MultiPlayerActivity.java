@@ -67,7 +67,6 @@ public class MultiPlayerActivity extends AppCompatActivity {
                 // marker three and five will be invisible
                 three.setVisibility(View.INVISIBLE);
                 five.setVisibility(View.INVISIBLE);
-                markThree.setVisibility(View.INVISIBLE);
                 markFive.setVisibility(View.INVISIBLE);
             }
         });
@@ -80,8 +79,6 @@ public class MultiPlayerActivity extends AppCompatActivity {
                 // marker three and four will be invisible
                 three.setVisibility(View.INVISIBLE);
                 four.setVisibility(View.INVISIBLE);
-                markThree.setVisibility(View.INVISIBLE);
-                markFour.setVisibility(View.INVISIBLE);
             }
         });
 
