@@ -53,7 +53,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // When the button is clicked, start the new activity
-                Intent intent = new Intent(MultiPlayerActivity.this, FiveByFive.class);
+                Intent intent = new Intent(MultiPlayerActivity.this, FivebyFive.class);
                 startActivity(intent);
             }
         });
