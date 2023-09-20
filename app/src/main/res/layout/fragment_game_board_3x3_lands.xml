@@ -42,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PLAYER 1"
+                    android:layout_marginTop="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="30sp"
                     android:gravity="center" />
@@ -94,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="180dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -113,6 +114,29 @@
                     android:text="NEW MATCH" />
             </LinearLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text="TIMER"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="45dp"/>
+
+            <TextView
+                android:id="@+id/countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="10dp"/>
+
         </RelativeLayout>
 
         <!-- Winner Text (Bottom 10%) -->
@@ -120,7 +144,7 @@
             android:id="@+id/winnertext"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:orientation="horizontal"
             android:gravity="center">
 
