@@ -196,9 +196,9 @@ public class FourByFour extends AppCompatActivity {
         int antidiagonal = 0;
 
         // Check rows
-        for (int i = 0; i < 4; i++) { // Change to 4x4
+        for (int i = 0; i < board.length; i++) {
             int m = 0;
-            for (int j = 0; j < 4; j++) { // Change to 4x4
+            for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == player) {
                     m++;
                 }
@@ -209,9 +209,9 @@ public class FourByFour extends AppCompatActivity {
         }
 
         // Check columns
-        for (int j = 0; j < 4; j++) { // Change to 4x4
+        for (int j = 0; j < board[0].length; j++) {
             int m = 0;
-            for (int i = 0; i < 4; i++) { // Change to 4x4
+            for (int i = 0; i < board.length; i++) {
                 if (board[i][j] == player) {
                     m++;
                 }
@@ -221,22 +221,25 @@ public class FourByFour extends AppCompatActivity {
             }
         }
 
-        // Check diagonals
-        for (int i = 0; i < 4; i++) { // Change to 4x4
-            if (board[i][i] == player) {
-                diagonal++;
+        // Check diagonals (for square grids)
+        if (board.length == board[0].length) {
+            for (int i = 0; i < board.length; i++) {
+                if (board[i][i] == player) {
+                    diagonal++;
+                }
+                if (board[i][board.length - 1 - i] == player) {
+                    antidiagonal++;
+                }
             }
-            if (board[i][3 - i] == player) { // Change to 3-i for 4x4
-                antidiagonal++;
+            if (diagonal == markersToWin || antidiagonal == markersToWin) {
+                winner = true; // Player has won in a diagonal
             }
-        }
-
-        if (diagonal == markersToWin || antidiagonal == markersToWin) {
-            winner = true; // Player has won in a diagonal
         }
 
         return winner; // No win detected
     }
+
+
 
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
