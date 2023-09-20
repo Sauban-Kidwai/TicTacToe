@@ -2,15 +2,17 @@
 package com.example.tictactoe;
 
     import androidx.appcompat.app.AppCompatActivity;
-    import android.content.Intent;
     import android.content.res.Configuration;
     import android.os.Bundle;
     import android.view.View;
     import android.widget.Button;
+    import android.widget.TextView;
 
 public class ThreeByThreeMulti extends AppCompatActivity {
     private char[][] board; // 3x3 Tic-Tac-Toe board
     private char currentPlayer; // Current player (either 'X' or 'O')
+    private char playerOneMarker;
+    private char playerTwoMarker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,11 @@ public class ThreeByThreeMulti extends AppCompatActivity {
 
         // Initialize the game board
         board = new char[3][3];
-        currentPlayer = getIntent().getCharExtra("playerOneElement", 'X'); // Start with player one's marker
+        char initialPlayerMarker = getIntent().getCharExtra("startingPlayer", 'X'); // Get the starting player
+        playerOneMarker = getIntent().getCharExtra("playerOneElement", 'X');
+        playerTwoMarker = getIntent().getCharExtra("playerTwoElement", 'O');
+        // Initialize currentPlayer based on the starting player
+        currentPlayer = initialPlayerMarker;
 
         // Initialize the buttons for each grid cell and set click listeners
         Button[][] buttons = new Button[3][3];
@@ -41,7 +47,7 @@ public class ThreeByThreeMulti extends AppCompatActivity {
         buttons[2][1] = findViewById(R.id.Button8);
         buttons[2][2] = findViewById(R.id.Button9);
 
-// Set click listeners for each grid cell
+        // Set click listeners for each grid cell
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 final int row = i;
@@ -63,26 +69,40 @@ public class ThreeByThreeMulti extends AppCompatActivity {
             button.setText(String.valueOf(currentPlayer));
 
             // Check for a win or a draw
-            if (checkWin(row, col, currentPlayer)) {
+            if (checkWin(currentPlayer)) {
                 // Handle the game result (player wins)
-                showGameResult(currentPlayer + " wins!");
+                showGameResult("Player " + (currentPlayer == playerOneMarker ? "1" : "2") + " wins!");
                 disableAllButtons();
             } else if (isBoardFull()) {
-                // Handle the game result (draw)
+                // (draw)
                 showGameResult("It's a draw!");
             } else {
                 // Switch to the next player
-                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+                currentPlayer = (currentPlayer == playerOneMarker) ? playerTwoMarker : playerOneMarker;
             }
         }
     }
     // Check if the current player has won
-    private boolean checkWin(int row, int col, char player) {
-        // Implement your win condition logic here
-        // Check rows, columns, and diagonals
-        // Return true if the player has won, otherwise return false
-        // Example: check rows
-        return (board[row][0] == player && board[row][1] == player && board[row][2] == player);
+    private boolean checkWin(char player) {
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+                return true;
+            }
+        }
+
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            if (board[0][i] == player && board[1][i] == player && board[2][i] == player) {
+                return true;
+            }
+        }
+
+        // Check diagonals
+        if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+            return true;
+        }
+        return board[0][2] == player && board[1][1] == player && board[2][0] == player;// No win condition
     }
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
@@ -97,15 +117,17 @@ public class ThreeByThreeMulti extends AppCompatActivity {
     }
     // Show the game result (you can customize this)
     private void showGameResult(String message) {
-        // You can display the result in a TextView or customize it as per your UI
-        // For example:
-        // TextView resultTextView = findViewById(R.id.resultTextView);
-        // resultTextView.setText(message);
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText(message);
+
     }
 
     // Disable all grid cell buttons
     private void disableAllButtons() {
-        // Disable all buttons to prevent further moves
-        // You can implement this based on your button IDs
+        for (int i = 1; i <= 9; i++) {
+            int buttonId = getResources().getIdentifier("Button" + i, "id", getPackageName());
+            Button button = findViewById(buttonId);
+            button.setEnabled(false);
+        }
     }
 }

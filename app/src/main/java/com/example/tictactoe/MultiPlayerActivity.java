@@ -121,7 +121,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setPlayerElements('X', 'O');
-                startGame();
+                startGame('X');
             }
         });
 
@@ -130,7 +130,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setPlayerElements('O', 'X');
-                startGame();
+                startGame('O');
             }
         });
 
@@ -153,12 +153,13 @@ public class MultiPlayerActivity extends AppCompatActivity {
         gridSize = s;
     }
 
-    private void startGame() {
+    private void startGame(char startingPlayer) {
         Intent intent = new Intent(this, ThreeByThreeMulti.class);
         intent.putExtra("gridSize", gridSize);
         intent.putExtra("playerOneElement", playerOneElement);
         intent.putExtra("playerTwoElement", playerTwoElement);
         intent.putExtra("markerCount", markerCount);
+        intent.putExtra("startingPlayer", startingPlayer);
         startActivity(intent);
     }
 
