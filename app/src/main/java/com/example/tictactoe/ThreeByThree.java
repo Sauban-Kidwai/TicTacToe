@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.os.CountDownTimer;
 import java.util.Random;
 import android.os.Handler;
 
@@ -17,12 +18,14 @@ public class ThreeByThree extends AppCompatActivity {
     private int markersToWin;
     private TextView playerOneTextView;
     private TextView playerTwoTextView;
-
     private TextView playerOneScoreTextView;
     private TextView playerTwoScoreTextView;
-
     private int playerOneScore;
     private int playerTwoScore;
+    private TextView countdownTextView; // Added for the countdown timer
+    private CountDownTimer countDownTimer; // Added for the countdown timer
+    private long timeLeftInMillis = 70000; // 70 seconds
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,9 @@ public class ThreeByThree extends AppCompatActivity {
         playerOneScoreTextView = findViewById(R.id.P1score);
         playerTwoScoreTextView = findViewById(R.id.P2score);
 
+        // Initialize countdown timer TextView
+        countdownTextView = findViewById(R.id.countdown);
+
         // Set initial player text color
         playerOneTextView.setTextColor(getResources().getColor(R.color.red));
         playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
@@ -86,6 +92,9 @@ public class ThreeByThree extends AppCompatActivity {
                 });
             }
         }
+
+        // Initialize and start the countdown timer
+        startCountdownTimer();
     }
     // Handle a player's move
     private void onCellClick(int row, int col, Button button) {
@@ -108,9 +117,11 @@ public class ThreeByThree extends AppCompatActivity {
                 updateScores();
 
                 disableAllButtons();
+                stopCountdownTimer(); // Stop the timer on game over
             } else if (isBoardFull()) {
                 // (draw)
                 showGameResult("It's a draw!");
+                stopCountdownTimer(); // Stop the timer on game over
             } else {
                 // Switch to the next player
                 currentPlayer = (currentPlayer == playerOneMarker) ? playerTwoMarker : playerOneMarker;
@@ -257,5 +268,43 @@ public class ThreeByThree extends AppCompatActivity {
             Button button = findViewById(buttonId);
             button.setEnabled(true);
         }
+    }
+
+    // Start the countdown timer
+    private void startCountdownTimer() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountdownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftInMillis = 0;
+                updateCountdownText();
+                // Handle timer finish, e.g., show a message or perform an action
+            }
+        }.start();
+    }
+
+    // Stop the countdown timer
+    private void stopCountdownTimer() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    // Update the countdown timer text
+    private void updateCountdownText() {
+        int seconds = (int) (timeLeftInMillis / 1000);
+        String timeLeft = String.format("%02d:%02d", seconds / 60, seconds % 60);
+        countdownTextView.setText(timeLeft);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopCountdownTimer();
     }
 }
