@@ -17,6 +17,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
     private char playerOneElement;
 
     private char playerTwoElement;
+    private int markerCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class MultiPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setGridSize(3);
+                markerCount = 3; //marker count for 3x3 board
 
                 // marker four and five will be invisible
                 four.setVisibility(View.INVISIBLE);
@@ -84,12 +86,42 @@ public class MultiPlayerActivity extends AppCompatActivity {
             }
         });
 
+        markThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setMarker(3);
+                markerCount = 3;
+                // set market to do something
+                markFour.setVisibility(View.INVISIBLE);
+                markFive.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        markFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setMarker(4);
+                // set market to do something
+                markThree.setVisibility(View.INVISIBLE);
+                markFive.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        markFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setMarker(5);
+                // set market to do something
+                markThree.setVisibility(View.INVISIBLE);
+                markFour.setVisibility(View.INVISIBLE);
+            }
+        });
+
         playerOneX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerOneElement = 'X';
-                playerTwoElement = 'O';
-                setPlayerOneElement('X');
+                setPlayerElements('X', 'O');
+                startGame();
             }
         });
 
@@ -97,38 +129,37 @@ public class MultiPlayerActivity extends AppCompatActivity {
         playerOneO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerOneElement = 'O';
-                playerTwoElement = 'X';
-                setPlayerOneElement('O');
+                setPlayerElements('O', 'X');
+                startGame();
             }
         });
 
     }
 
 
-    public boolean getGameType() {
-        gameType = main.getSinglePlayer();
-        return gameType;
+    private void setPlayerElements(char playerOneMarker, char playerTwoMarker) {
+        playerOneElement = playerOneMarker;
+        playerTwoElement = playerTwoMarker;
     }
 
     public void setMarker(int m) {
         marks = m;
     }
-
-    public int getMarker() {
-        return marks;
-    }
-
-    public void setPlayerOneElement(char e) {
-        playerOneElement = e;
-    }
-
     public char getPlayerOneElement() {
         return playerOneElement;
     }
 
     public void setGridSize(int s) {
         gridSize = s;
+    }
+
+    private void startGame() {
+        Intent intent = new Intent(this, ThreeByThreeMulti.class);
+        intent.putExtra("gridSize", gridSize);
+        intent.putExtra("playerOneElement", playerOneElement);
+        intent.putExtra("playerTwoElement", playerTwoElement);
+        intent.putExtra("markerCount", markerCount);
+        startActivity(intent);
     }
 
     public int getGridSize() {
