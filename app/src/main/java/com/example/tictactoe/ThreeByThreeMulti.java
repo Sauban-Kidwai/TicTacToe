@@ -64,7 +64,7 @@ public class ThreeByThreeMulti extends AppCompatActivity {
         playerTwoScoreTextView = findViewById(R.id.P2score);
 
         // Set initial player text color
-        playerOneTextView.setTextColor(getResources().getColor(R.color.black));
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
         playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
 
         // Set click listeners for each grid cell
@@ -112,11 +112,11 @@ public class ThreeByThreeMulti extends AppCompatActivity {
 
                 // Update text color based on the current player
                 if (currentPlayer == playerOneMarker) {
-                    playerOneTextView.setTextColor(getResources().getColor(R.color.black));
+                    playerOneTextView.setTextColor(getResources().getColor(R.color.red));
                     playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
                 } else {
                     playerOneTextView.setTextColor(getResources().getColor(R.color.white));
-                    playerTwoTextView.setTextColor(getResources().getColor(R.color.black));
+                    playerTwoTextView.setTextColor(getResources().getColor(R.color.red));
                 }
             }
         }
