@@ -50,6 +50,12 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setGridSize(3);
+
+                // marker four and five will be invisible
+                four.setVisibility(View.INVISIBLE);
+                five.setVisibility(View.INVISIBLE);
+                markFour.setVisibility(View.INVISIBLE);
+                markFive.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -58,6 +64,12 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setGridSize(4);
+
+                // marker three and five will be invisible
+                three.setVisibility(View.INVISIBLE);
+                five.setVisibility(View.INVISIBLE);
+                markThree.setVisibility(View.INVISIBLE);
+                markFive.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -66,29 +78,14 @@ public class SinglePlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setGridSize(5);
-            }
-        });
 
-        // Marker buttons
-        markThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setMarker(3);
+                // marker three and four will be invisible
+                three.setVisibility(View.INVISIBLE);
+                four.setVisibility(View.INVISIBLE);
+                markThree.setVisibility(View.INVISIBLE);
+                markFour.setVisibility(View.INVISIBLE);
             }
-        });
 
-        markFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setMarker(4);
-            }
-        });
-
-        markFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setMarker(5);
-            }
         });
 
         playerOneX.setOnClickListener(new View.OnClickListener() {
