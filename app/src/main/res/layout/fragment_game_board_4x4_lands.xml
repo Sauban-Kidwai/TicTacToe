@@ -42,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PLAYER 1"
+                    android:layout_marginTop="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="30sp"
                     android:gravity="center" />
@@ -94,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="180dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -113,6 +114,31 @@
                     android:text="NEW MATCH" />
             </LinearLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text="TIMER"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="45dp"/>
+
+            <TextView
+                android:id="@+id/countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="10dp"/>
+
+
+
         </RelativeLayout>
 
         <!-- Winner Text (Bottom 10%) -->
@@ -120,7 +146,7 @@
             android:id="@+id/winnertext"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:orientation="horizontal"
             android:gravity="center">
 
@@ -139,7 +165,7 @@
     <RelativeLayout
         android:id="@+id/rightHalf"
         android:layout_width="400dp"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -154,10 +180,10 @@
         <GridLayout
             android:id="@+id/rightHalfgrid"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_margin="20dp"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -165,8 +191,8 @@
             <!-- Buttons for the first row -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="0"
                 android:background="@color/game_blue"
@@ -177,7 +203,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="1"
                 android:background="@android:color/white" />
@@ -185,8 +211,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="2"
                 android:background="@color/game_blue"
@@ -197,7 +223,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="3"
                 android:background="@android:color/white" />
@@ -205,8 +231,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button3"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="4"
                 android:background="@color/game_blue"
@@ -217,7 +243,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="5"
                 android:background="@android:color/white" />
@@ -225,8 +251,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button4"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="6"
                 android:background="@color/game_blue"
@@ -237,7 +263,7 @@
 
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="1"
                 android:layout_column="0"
@@ -245,21 +271,21 @@
 
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="1"
                 android:layout_column="2"
                 android:background="@android:color/white" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="1"
                 android:layout_column="4"
                 android:background="@android:color/white" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="1"
                 android:layout_column="6"
@@ -267,8 +293,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button5"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="2"
                 android:layout_column="0"
                 android:background="@color/game_blue"
@@ -279,7 +305,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="2"
                 android:layout_column="1"
                 android:background="@android:color/white" />
@@ -287,8 +313,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button6"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="2"
                 android:layout_column="2"
                 android:background="@color/game_blue"
@@ -299,7 +325,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="2"
                 android:layout_column="3"
                 android:background="@android:color/white" />
@@ -307,8 +333,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button7"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="2"
                 android:layout_column="4"
                 android:background="@color/game_blue"
@@ -319,7 +345,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="2"
                 android:layout_column="5"
                 android:background="@android:color/white" />
@@ -327,8 +353,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button8"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="2"
                 android:layout_column="6"
                 android:background="@color/game_blue"
@@ -339,7 +365,7 @@
 
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="3"
                 android:layout_column="0"
@@ -347,21 +373,21 @@
 
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="3"
                 android:layout_column="2"
                 android:background="@android:color/white" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="3"
                 android:layout_column="4"
                 android:background="@android:color/white" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="3"
                 android:layout_column="6"
@@ -369,8 +395,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button9"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="4"
                 android:layout_column="0"
                 android:background="@color/game_blue"
@@ -381,7 +407,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="4"
                 android:layout_column="1"
                 android:background="@android:color/white" />
@@ -389,8 +415,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button10"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="4"
                 android:layout_column="2"
                 android:background="@color/game_blue"
@@ -401,7 +427,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="4"
                 android:layout_column="3"
                 android:background="@android:color/white" />
@@ -409,8 +435,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button11"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="4"
                 android:layout_column="4"
                 android:background="@color/game_blue"
@@ -421,7 +447,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="4"
                 android:layout_column="5"
                 android:background="@android:color/white" />
@@ -429,8 +455,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button12"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="4"
                 android:layout_column="6"
                 android:background="@color/game_blue"
@@ -441,7 +467,7 @@
 
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="5"
                 android:layout_column="0"
@@ -449,21 +475,21 @@
 
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="5"
                 android:layout_column="2"
                 android:background="@android:color/white" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="5"
                 android:layout_column="4"
                 android:background="@android:color/white" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="4dp"
                 android:layout_row="5"
                 android:layout_column="6"
@@ -472,8 +498,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button13"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="6"
                 android:layout_column="0"
                 android:background="@color/game_blue"
@@ -484,7 +510,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="6"
                 android:layout_column="1"
                 android:background="@android:color/white" />
@@ -492,8 +518,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button14"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="6"
                 android:layout_column="2"
                 android:background="@color/game_blue"
@@ -504,7 +530,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="6"
                 android:layout_column="3"
                 android:background="@android:color/white" />
@@ -512,8 +538,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button15"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="6"
                 android:layout_column="4"
                 android:background="@color/game_blue"
@@ -524,7 +550,7 @@
 
             <View
                 android:layout_width="4dp"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_row="6"
                 android:layout_column="5"
                 android:background="@android:color/white" />
@@ -532,8 +558,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Button16"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="6"
                 android:layout_column="6"
                 android:background="@color/game_blue"
