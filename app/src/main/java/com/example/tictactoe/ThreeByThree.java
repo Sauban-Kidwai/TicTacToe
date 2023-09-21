@@ -320,11 +320,6 @@ public class ThreeByThree extends AppCompatActivity {
         countdownTextView.setText(timeLeft);
     }
 
-    // Reset counter
-    private void resetCountDown() {
-        timeLeftInMillis = 70000;
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -334,10 +329,10 @@ public class ThreeByThree extends AppCompatActivity {
     //Resets game
     private void resetGame() {
         // Clear the game board
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
                 board[i][j] = '\0';
-                Button button = findViewById(getResources().getIdentifier("Button" + (i * 3 + j + 1), "id", getPackageName()));
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
                 button.setText(""); // Clear the button text
                 button.setEnabled(true); // Enable all buttons
             }
@@ -368,10 +363,10 @@ public class ThreeByThree extends AppCompatActivity {
     //Keeps the score, and continues the current game
     private void newMatch() {
         // Clear the game board
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
                 board[i][j] = '\0';
-                Button button = findViewById(getResources().getIdentifier("Button" + (i * 3 + j + 1), "id", getPackageName()));
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
                 button.setText(""); // Clear the button text
                 button.setEnabled(true); // Enable all buttons
             }

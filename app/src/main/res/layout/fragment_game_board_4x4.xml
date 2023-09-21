@@ -79,7 +79,7 @@
 
         <!-- Left Button -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/leftButton"
+            android:id="@+id/Reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/leftLayout"
@@ -112,7 +112,7 @@
 
         <!-- Right Button -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/rightButton"
+            android:id="@+id/NewMatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rightlayout"
