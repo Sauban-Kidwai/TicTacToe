@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.content.Intent;
 
 public class ThreeByThreeMulti extends AppCompatActivity {
     private char[][] board; // 3x3 Tic-Tac-Toe board
@@ -32,6 +33,7 @@ public class ThreeByThreeMulti extends AppCompatActivity {
 
         int orientation = getResources().getConfiguration().orientation;
 
+        // orientation
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // Load the landscape layout
             setContentView(R.layout.fragment_game_board_3x3_lands);
@@ -39,6 +41,24 @@ public class ThreeByThreeMulti extends AppCompatActivity {
             // Load the portrait layout
             setContentView(R.layout.fragment_game_board_3x3);
         }
+
+        //NEW MATCH Button code
+        Button newMatchButton = findViewById(R.id.rightButton);
+
+        // Add a click listener to the button
+        newMatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the button click event here
+                // Return to the previously set layout (either portrait or landscape)
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    setContentView(R.layout.fragment_settings_screen_2player_land);
+                } else {
+                    setContentView(R.layout.fragment_settings_screen_2player);
+                }
+            }
+        });
+
 
         // Initialize the game board
         board = new char[3][3];
@@ -177,7 +197,7 @@ public class ThreeByThreeMulti extends AppCompatActivity {
         return true; // All cells are filled, it's a draw
     }
 
-    // Show the game result (you can customize this)
+    // Show the game result
     private void showGameResult(String message) {
         TextView winnerTextView = findViewById(R.id.winnerTextView);
         winnerTextView.setText(message);
