@@ -29,6 +29,7 @@ public class FourByFourMulti extends AppCompatActivity {
 
     private CountDownTimer countDownTimer; // Added for the countdown timer
     private long timeLeftInMillis = 70000; // 70 seconds
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +104,25 @@ public class FourByFourMulti extends AppCompatActivity {
             }
         }
 
+        // Reset and NewMatch initialise
+        Button resetButton = findViewById(R.id.Reset);
+        Button newMatchButton = findViewById(R.id.NewMatch);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the reset action
+                resetGame();
+            }
+        });
+        newMatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the newMatch action
+                newMatch();
+            }
+        });
         // Initialize and start the countdown timer
+        updateScores();
         startCountdownTimer();
     }
     // Handle a player's move
@@ -264,5 +283,67 @@ public class FourByFourMulti extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         stopCountdownTimer();
+    }
+
+    //Resets game
+    private void resetGame() {
+        // Clear the game board
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = '\0';
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
+                button.setText(""); // Clear the button text
+                button.setEnabled(true); // Enable all buttons
+            }
+        }
+
+        // Reset player and scores
+        currentPlayer = playerOneMarker;
+        playerOneScore = 0;
+        playerTwoScore = 0;
+        updateScores();
+
+        // Stop the existing countdown timer before starting a new one
+        stopCountdownTimer();
+
+        // Start the countdown timer again
+        timeLeftInMillis = 70000; // Reset the timer duration
+        startCountdownTimer();
+
+        // Reset text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
+        // Clear the game result message
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText("");
+    }
+
+    //Keeps the score, and continues the current game
+    private void newMatch() {
+        // Clear the game board
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = '\0';
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
+                button.setText(""); // Clear the button text
+                button.setEnabled(true); // Enable all buttons
+            }
+        }
+
+        // Stop the existing countdown timer before starting a new one
+        stopCountdownTimer();
+
+        // Start the countdown timer again
+        timeLeftInMillis = 70000; // Reset the timer duration
+        startCountdownTimer();
+
+        // Reset text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
+        // Clear the game result message
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText("");
     }
 }
