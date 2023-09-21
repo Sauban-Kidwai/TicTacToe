@@ -236,8 +236,30 @@ public class FourByFour extends AppCompatActivity {
             }
         }
 
+        // Check for 3-char diagonal win (anywhere on the grid)
+        for (int i = 0; i <= board.length - markersToWin; i++) {
+            for (int j = 0; j <= board[0].length - markersToWin; j++) {
+                int primaryDiagonalCount = 0;
+                int secondaryDiagonalCount = 0;
+
+                for (int k = 0; k < markersToWin; k++) {
+                    if (board[i + k][j + k] == player) {
+                        primaryDiagonalCount++;
+                    }
+                    if (board[i + k][j + markersToWin - 1 - k] == player) {
+                        secondaryDiagonalCount++;
+                    }
+                }
+
+                if (primaryDiagonalCount == markersToWin || secondaryDiagonalCount == markersToWin) {
+                    winner = true; // Player has won in a diagonal
+                }
+            }
+        }
+
         return winner; // No win detected
     }
+
 
 
 

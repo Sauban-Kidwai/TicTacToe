@@ -205,9 +205,9 @@ public class FiveByFive extends AppCompatActivity {
         int antidiagonal = 0;
 
         // Check rows
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < board.length; i++) {
             int m = 0;
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == player) {
                     m++;
                 }
@@ -218,9 +218,9 @@ public class FiveByFive extends AppCompatActivity {
         }
 
         // Check columns
-        for (int j = 0; j < 5; j++) {
+        for (int j = 0; j < board[0].length; j++) {
             int m = 0;
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < board.length; i++) {
                 if (board[i][j] == player) {
                     m++;
                 }
@@ -230,18 +230,40 @@ public class FiveByFive extends AppCompatActivity {
             }
         }
 
-        // Check diagonals
-        for (int i = 0; i < 5; i++) {
-            if (board[i][i] == player) {
-                diagonal++;
+        // Check diagonals (for square grids)
+        if (board.length == board[0].length) {
+            for (int i = 0; i < board.length; i++) {
+                if (board[i][i] == player) {
+                    diagonal++;
+                }
+                if (board[i][board.length - 1 - i] == player) {
+                    antidiagonal++;
+                }
             }
-            if (board[i][4 - i] == player) {
-                antidiagonal++;
+            if (diagonal == markersToWin || antidiagonal == markersToWin) {
+                winner = true; // Player has won in a diagonal
             }
         }
 
-        if (diagonal == markersToWin || antidiagonal == markersToWin) {
-            winner = true; // Player has won in a diagonal
+        // Check for 3-char diagonal win (anywhere on the grid)
+        for (int i = 0; i <= board.length - markersToWin; i++) {
+            for (int j = 0; j <= board[0].length - markersToWin; j++) {
+                int primaryDiagonalCount = 0;
+                int secondaryDiagonalCount = 0;
+
+                for (int k = 0; k < markersToWin; k++) {
+                    if (board[i + k][j + k] == player) {
+                        primaryDiagonalCount++;
+                    }
+                    if (board[i + k][j + markersToWin - 1 - k] == player) {
+                        secondaryDiagonalCount++;
+                    }
+                }
+
+                if (primaryDiagonalCount == markersToWin || secondaryDiagonalCount == markersToWin) {
+                    winner = true; // Player has won in a diagonal
+                }
+            }
         }
 
         return winner; // No win detected
