@@ -100,7 +100,42 @@ public class FourByFour extends AppCompatActivity {
             }
         }
 
+        // Find the reset button and set an OnClickListener
+        Button resetButton = findViewById(R.id.Reset);
+        Button newMatchButton = findViewById(R.id.NewMatch);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the reset action
+                resetGame();
+            }
+        });
+
+        newMatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the newMatch action
+                newMatch();
+            }
+        });
+
+        // Set click listeners for each grid cell
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                final int row = i;
+                final int col = j;
+                buttons[i][j].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Handle the player's move
+                        onCellClick(row, col, (Button) view);
+                    }
+                });
+            }
+        }
+
         // Initialize and start the countdown timer
+        updateScores();
         startCountdownTimer();
     }
 
@@ -196,47 +231,72 @@ public class FourByFour extends AppCompatActivity {
         int antidiagonal = 0;
 
         // Check rows
-        for (int i = 0; i < 4; i++) { // Change to 4x4
-            int markerCount = 0;
-            for (int j = 0; j < 4; j++) { // Change to 4x4
+        for (int i = 0; i < board.length; i++) {
+            int m = 0;
+            for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == player) {
-                    markerCount++;
+                    m++;
                 }
             }
-            if (markerCount == markersToWin) {
+            if (m == markersToWin) {
                 winner = true; // Player has won in this row
             }
         }
 
         // Check columns
-        for (int j = 0; j < 4; j++) { // Change to 4x4
-            int markerCount = 0;
-            for (int i = 0; i < 4; i++) { // Change to 4x4
+        for (int j = 0; j < board[0].length; j++) {
+            int m = 0;
+            for (int i = 0; i < board.length; i++) {
                 if (board[i][j] == player) {
-                    markerCount++;
+                    m++;
                 }
             }
-            if (markerCount == markersToWin) {
+            if (m == markersToWin) {
                 winner = true; // Player has won in this column
             }
         }
 
-        // Check diagonals
-        for (int i = 0; i < 4; i++) { // Change to 4x4
-            if (board[i][i] == player) {
-                diagonal++;
+        // Check diagonals (for square grids)
+        if (board.length == board[0].length) {
+            for (int i = 0; i < board.length; i++) {
+                if (board[i][i] == player) {
+                    diagonal++;
+                }
+                if (board[i][board.length - 1 - i] == player) {
+                    antidiagonal++;
+                }
             }
-            if (board[i][3 - i] == player) { // Change to 3-i for 4x4
-                antidiagonal++;
+            if (diagonal == markersToWin || antidiagonal == markersToWin) {
+                winner = true; // Player has won in a diagonal
             }
         }
 
-        if (diagonal == markersToWin || antidiagonal == markersToWin) {
-            winner = true; // Player has won in a diagonal
+        // Check for 3-char diagonal win (anywhere on the grid)
+        for (int i = 0; i <= board.length - markersToWin; i++) {
+            for (int j = 0; j <= board[0].length - markersToWin; j++) {
+                int primaryDiagonalCount = 0;
+                int secondaryDiagonalCount = 0;
+
+                for (int k = 0; k < markersToWin; k++) {
+                    if (board[i + k][j + k] == player) {
+                        primaryDiagonalCount++;
+                    }
+                    if (board[i + k][j + markersToWin - 1 - k] == player) {
+                        secondaryDiagonalCount++;
+                    }
+                }
+
+                if (primaryDiagonalCount == markersToWin || secondaryDiagonalCount == markersToWin) {
+                    winner = true; // Player has won in a diagonal
+                }
+            }
         }
 
         return winner; // No win detected
     }
+
+
+
 
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
@@ -289,8 +349,13 @@ public class FourByFour extends AppCompatActivity {
             public void onFinish() {
                 timeLeftInMillis = 0;
                 updateCountdownText();
-                // Handle timer finish, e.g., show a message or perform an action
+
+                if (!checkWin(currentPlayer)) {
+                    // Handle game over when time runs out
+                    showGameResult("It's a draw!");
+                }
             }
+
         }.start();
     }
 
@@ -306,11 +371,81 @@ public class FourByFour extends AppCompatActivity {
         int seconds = (int) (timeLeftInMillis / 1000);
         String timeLeft = String.format("%02d:%02d", seconds / 60, seconds % 60);
         countdownTextView.setText(timeLeft);
+
+        if (timeLeftInMillis <= 0) {
+            // Handle game over when time runs out
+            showGameResult("It's a draw!");
+            disableAllButtons();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         stopCountdownTimer();
+    }
+
+    //Resets game
+    private void resetGame() {
+        // Clear the game board
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = '\0';
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
+                button.setText(""); // Clear the button text
+                button.setEnabled(true); // Enable all buttons
+            }
+        }
+
+        // Reset player and scores
+        currentPlayer = playerOneMarker;
+        playerOneScore = 0;
+        playerTwoScore = 0;
+        updateScores();
+
+        // Stop the existing countdown timer before starting a new one
+        stopCountdownTimer();
+
+        // Start the countdown timer again
+        timeLeftInMillis = 70000; // Reset the timer duration
+        startCountdownTimer();
+
+        // Reset text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
+        // Clear the game result message
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText("");
+    }
+
+    //Keeps the score, and continues the current game
+    private void newMatch() {
+        // Clear the game board
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = '\0';
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
+                button.setText(""); // Clear the button text
+                button.setEnabled(true); // Enable all buttons
+            }
+        }
+
+        // Stop the existing countdown timer before starting a new one
+        stopCountdownTimer();
+
+        //updateScore();
+
+        // Start the countdown timer again
+        timeLeftInMillis = 70000; // Reset the timer duration
+        startCountdownTimer();
+
+        // Reset text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
+        // Clear the game result message
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText("");
     }
 }

@@ -78,6 +78,25 @@ public class ThreeByThree extends AppCompatActivity {
         playerOneTextView.setTextColor(getResources().getColor(R.color.red));
         playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
 
+        // Find the reset button and set an OnClickListener
+        Button resetButton = findViewById(R.id.Reset);
+        Button newMatchButton = findViewById(R.id.NewMatch);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the reset action
+                resetGame();
+            }
+        });
+
+        newMatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the newMatch action
+                newMatch();
+            }
+        });
+
         // Set click listeners for each grid cell
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -94,6 +113,7 @@ public class ThreeByThree extends AppCompatActivity {
         }
 
         // Initialize and start the countdown timer
+        updateScores();
         startCountdownTimer();
     }
     // Handle a player's move
@@ -230,8 +250,6 @@ public class ThreeByThree extends AppCompatActivity {
         return winner; // No win detected
     }
 
-
-
     // Check if the board is full (a draw)
     private boolean isBoardFull() {
         boolean full = true;
@@ -283,7 +301,11 @@ public class ThreeByThree extends AppCompatActivity {
             public void onFinish() {
                 timeLeftInMillis = 0;
                 updateCountdownText();
-                // Handle timer finish, e.g., show a message or perform an action
+
+                if (!checkWin(currentPlayer)) {
+                    // Handle game over when time runs out
+                    showGameResult("It's a draw!");
+                }
             }
         }.start();
     }
@@ -300,6 +322,12 @@ public class ThreeByThree extends AppCompatActivity {
         int seconds = (int) (timeLeftInMillis / 1000);
         String timeLeft = String.format("%02d:%02d", seconds / 60, seconds % 60);
         countdownTextView.setText(timeLeft);
+
+        if (timeLeftInMillis <= 0) {
+            // Handle game over when time runs out
+            showGameResult("It's a draw!");
+            disableAllButtons();
+        }
     }
 
     @Override
@@ -307,4 +335,69 @@ public class ThreeByThree extends AppCompatActivity {
         super.onDestroy();
         stopCountdownTimer();
     }
+
+    //Resets game
+    private void resetGame() {
+        // Clear the game board
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = '\0';
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
+                button.setText(""); // Clear the button text
+                button.setEnabled(true); // Enable all buttons
+            }
+        }
+
+        // Reset player and scores
+        currentPlayer = playerOneMarker;
+        playerOneScore = 0;
+        playerTwoScore = 0;
+        updateScores();
+
+        // Stop the existing countdown timer before starting a new one
+        stopCountdownTimer();
+
+        // Start the countdown timer again
+        timeLeftInMillis = 70000; // Reset the timer duration
+        startCountdownTimer();
+
+        // Reset text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
+        // Clear the game result message
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText("");
+    }
+
+    //Keeps the score, and continues the current game
+    private void newMatch() {
+        // Clear the game board
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = '\0';
+                Button button = findViewById(getResources().getIdentifier("Button" + (i * board.length + j + 1), "id", getPackageName()));
+                button.setText(""); // Clear the button text
+                button.setEnabled(true); // Enable all buttons
+            }
+        }
+
+        // Stop the existing countdown timer before starting a new one
+        stopCountdownTimer();
+
+        //updateScore();
+
+        // Start the countdown timer again
+        timeLeftInMillis = 70000; // Reset the timer duration
+        startCountdownTimer();
+
+        // Reset text color
+        playerOneTextView.setTextColor(getResources().getColor(R.color.red));
+        playerTwoTextView.setTextColor(getResources().getColor(R.color.white));
+
+        // Clear the game result message
+        TextView winnerTextView = findViewById(R.id.winnerTextView);
+        winnerTextView.setText("");
+    }
+
 }
