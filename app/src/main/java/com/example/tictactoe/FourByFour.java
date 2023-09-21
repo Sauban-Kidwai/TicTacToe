@@ -349,8 +349,13 @@ public class FourByFour extends AppCompatActivity {
             public void onFinish() {
                 timeLeftInMillis = 0;
                 updateCountdownText();
-                // Handle timer finish, e.g., show a message or perform an action
+
+                if (!checkWin(currentPlayer)) {
+                    // Handle game over when time runs out
+                    showGameResult("It's a draw!");
+                }
             }
+
         }.start();
     }
 
@@ -366,6 +371,12 @@ public class FourByFour extends AppCompatActivity {
         int seconds = (int) (timeLeftInMillis / 1000);
         String timeLeft = String.format("%02d:%02d", seconds / 60, seconds % 60);
         countdownTextView.setText(timeLeft);
+
+        if (timeLeftInMillis <= 0) {
+            // Handle game over when time runs out
+            showGameResult("It's a draw!");
+            disableAllButtons();
+        }
     }
 
     @Override
